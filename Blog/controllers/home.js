@@ -21,7 +21,9 @@ module.exports = {
                  if(err){
                      console.log(err.message);
                  }
-                 res.render('home/article', {articles: category.articles, category: category});
+                 Category.find({}).then(categories => {
+                     res.render('home/article', {articles: category.articles, category: category, categories: categories});
+                 })
              })
 
 

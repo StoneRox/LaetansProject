@@ -42,12 +42,16 @@ module.exports = {
 
         Article.findById(id).populate('author tags').then(article => {
             if (!req.user) {
-                res.render('article/details', {article: article, isUserAuthorized: false});
+                Category.find({}).then(categories => {
+                    res.render('article/details', {article: article, isUserAuthorized: false, categories: categories});
+                });
                 return;
             }
             req.user.isInRole('Admin').then(isAdmin => {
                 let isUserAuthorized = isAdmin || req.user.isAuthor(article);
-                res.render('article/details', {article: article, isUserAuthorized: isUserAuthorized});
+                Category.find({}).then(categories => {
+                    res.render('article/details', {article: article, isUserAuthorized: isUserAuthorized, categories: categories});
+                })
             });
         });
     },
