@@ -5,11 +5,22 @@
                 <header>
                     <h2>{{article.title}}</h2>
                 </header>
+                {{#if article.picture}}
+                    <p>
+                        <img src="{{article.picture}}" alt="" width="500" onerror="this.style.display='none'">
+                    </p>
+                {{/if}}
                 <p>
                     {{article.content}}
                 </p>
                 <small class="author">
                     {{article.author.fullName}}
+                    <p>
+                        Created on:
+                        <br>
+                        {{article.date}}
+                    </p>
+
                 </small>
                 <footer>
                     <div class="pull-left">
@@ -18,6 +29,7 @@
                                href="/tag/{{this.name}}">{{ this.name }}</a>
                         {{/each}}
                     </div>
+
                     <div class="pull-right">
                         {{#if isUserAuthorized}}
                             <a class="btn btn-success btn-xs"

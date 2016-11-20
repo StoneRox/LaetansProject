@@ -1,6 +1,7 @@
 const Article = require('mongoose').model('Article');
 const Category = require('mongoose').model('Category');
 const initializeTags = require('./../models/Tag').initializeTags;
+
 module.exports = {
     createGet: (req, res) => {
         if (!req.isAuthenticated()) {
@@ -28,6 +29,8 @@ module.exports = {
 
         articleArgs.author = req.user.id;
         articleArgs.tags = [];
+
+
 
         Article.create(articleArgs).then(article => {
             let tagNames = articleArgs.tagNames.split(/\s+|,/).filter(tag => {return tag});
@@ -115,6 +118,7 @@ module.exports = {
                 article.category = articleArgs.category;
                 article.title = articleArgs.title;
                 article.content = articleArgs.content;
+                article.picture = articleArgs.picture;
 
                 let newTagNames = articleArgs.tags.split(/\s+|,/).filter(tag => {return tag});
 

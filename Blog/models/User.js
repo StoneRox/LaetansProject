@@ -10,6 +10,7 @@ let userSchema = mongoose.Schema(
         salt: {type: String, required: true},
         articles: [{type: mongoose.Schema.ObjectId, ref: 'Article'}],
         roles: [{type: mongoose.Schema.Types.ObjectId, ref: 'Role'}],
+
     }
 );
 

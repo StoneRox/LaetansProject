@@ -8,6 +8,7 @@ let articleSchema = mongoose.Schema(
         author: {type: mongoose.Schema.ObjectId, required: true, ref: 'User'},
         category: {type: mongoose.Schema.Types.ObjectId, required: true, ref: 'Category'},
         tags: [{type: mongoose.Schema.Types.ObjectId, required: true, ref: 'Tag'}],
+        picture: {type: String, required: false},
         date: {type: Date, default: Date.now}
     }
 );
@@ -69,7 +70,8 @@ articleSchema.method({
     deleteTag: function (tagId) {
         this.tags.remove(tagId);
         this.save();
-    }
+    },
+
 });
 const Article = mongoose.model('Article', articleSchema);
 module.exports = Article;

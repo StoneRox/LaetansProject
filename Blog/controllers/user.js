@@ -93,6 +93,7 @@ module.exports = {
         if (!req.user) {
             res.redirect('/user/login');
         }
+
         res.render('user/details', req.user);
     }
 };

@@ -7,6 +7,11 @@
         <header>
             <h2>{{ this.title }}</h2>
         </header>
+        {{#if this.picture}}
+            <p>
+                <img src="{{this.picture}}" alt="" width="500" onerror="this.style.display='none'">
+            </p>
+        {{/if}}
         <p>
             {{ this.content }}
         </p>
