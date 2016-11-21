@@ -1,79 +1,122 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>SoftUni Blog</title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <title>Laetans Project</title>
+    <link rel='stylesheet' href='/stylesheets/style.css'/>
     <script src="/javascripts/jquery-1.10.2.js"></script>
     <script src="/javascripts/bootstrap.js"></script>
 </head>
 <body>
-    <header>
-        <div class="navbar navbar-default navbar-fixed-top text-uppercase">
-            <div class="container">
-                <div class="navbar-header">
-                    <a href="/" class="navbar-brand">SoftUni Blog</a>
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                </div>
-                {{#if categories}}
+<header>
+    <div class="navbar navbar-default navbar-fixed-top ">
+        <div class="container">
+            <div class="navbar-header">
+                <a href="/" >
+                    <div class="navbar-brand">
+                        <img class="logo" src="/images/Dragon_Eye.jpg" style="margin-top: -15px" height="50"
+                        onmouseover="this.src = '/images/blue.jpg'" onmouseout="this.src='/images/Dragon_Eye.jpg'"/>
+                    </div>
+
+                    <div class="navbar-brand">
+                        Home
+                    </div>
+
+                </a>
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            {{#if categories}}
+                <ul class="nav navbar-nav navbar-left">
+
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                           role="button" aria-expanded="false">Categories<span
+                                class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                            {{#each categories}}
+                                <li><a href="/category/{{this.id}}">{{this.name}}</a></li>
+                            {{/each}}
+                        </ul>
+                    </li>
+                </ul>
+            {{/if}}
+
+
+
+
+            {{#if user}}
+                <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav navbar-left">
+                        <li>
+                            <a href="/article/create" class="nav navbar-nav navbar-left">New Article</a>
+                        </li>
+
+                    </ul>
+
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <input type="text" class="form-control" style="margin-top: 20px; height: 10px">
+                        </li>
+                        <li>
+                            <a href="#">Search</a>
+                        </li>
+                        {{#if isAdmin}}
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                                   role="button" aria-expanded="false">Admin<span
+                                        class="caret"></span></a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li><a href="/admin/user/all">Users</a></li>
+                                    <li><a href="/admin/category/all">Categories</a></li>
+                                </ul>
+                            </li>
+                        {{/if}}
 
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown"
-                               role="button" aria-expanded="false">Categories<span
+                               role="button" aria-expanded="false">Profile<span
                                     class="caret"></span></a>
                             <ul class="dropdown-menu" role="menu">
-                                {{#each categories}}
-                                    <li><a href="/category/{{this.id}}">{{this.name}}</a></li>
-                                {{/each}}
+
+                                <li><a href="/user/details">My info</a></li>
+                                <li><a href="/user/logout">Logout</a></li>
+
                             </ul>
                         </li>
+
                     </ul>
-                {{/if}}
+                </div>
+            {{/if}}
+            {{#unless user}}
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <input type="text" class="form-control" style="margin-top: 20px; height: 10px">
+                        </li>
+                        <li>
+                            <a href="#">Search</a>
+                        </li>
 
-                {{#if user}}
-                    <div class="navbar-collapse collapse">
+                        <li><a href="/user/register">Register</a></li>
+                        <li><a href="/user/login">Login</a></li>
+                    </ul>
+                </div>
+            {{/unless}}
 
-                        <ul class="nav navbar-nav navbar-right">
-                            {{#if isAdmin}}
-                                <li class="dropdown">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"
-                                       role="button" aria-expanded="false">Admin<span
-                                            class="caret"></span></a>
-                                    <ul class="dropdown-menu" role="menu">
-                                        <li><a href="/admin/user/all">Users</a></li>
-                                        <li><a href="/admin/category/all">Categories</a></li>
-                                    </ul>
-                                </li>
-                            {{/if}}
-                            <li><a href="/user/details">Welcome({{user.email}})</a></li>
-                            <li><a href="/article/create">New Article</a></li>
-                            <li><a href="/user/logout">Logout</a></li>
-                        </ul>
-                    </div>
-                {{/if}}
-                {{#unless user}}
-                    <div class="navbar-collapse collapse">
-                        <ul class="nav navbar-nav navbar-right">
-                            <li><a href="/user/register">Register</a></li>
-                            <li><a href="/user/login">Login</a></li>
-                        </ul>
-                    </div>
-                {{/unless}}
-            </div>
         </div>
-    </header>
-    {{#if error }}
-        <h2>{{error}}</h2>
-    {{/if}}
-    {{{body}}}
+    </div>
+</header>
+{{#if error }}
+    <h2>{{error}}</h2>
+{{/if}}
+{{{body}}}
 </body>
 <footer>
     <div class="container modal-footer">
-        <p>&copy; 2016 - Software University Foundation</p>
+        <p>&copy; 2016 - Laetans</p>
     </div>
 </footer>
 </html>
