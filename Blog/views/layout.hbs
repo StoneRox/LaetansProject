@@ -20,7 +20,6 @@
                     <div class="navbar-brand">
                         Home
                     </div>
-
                 </a>
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                     <span class="icon-bar"></span>
@@ -43,25 +42,19 @@
                     </li>
                 </ul>
             {{/if}}
-
-
-
-
             {{#if user}}
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav navbar-left">
                         <li>
                             <a href="/article/create" class="nav navbar-nav navbar-left">New Article</a>
                         </li>
-
                     </ul>
-
                     <ul class="nav navbar-nav navbar-right">
                         <li>
-                            <input type="text" class="form-control" style="margin-top: 20px; height: 10px">
-                        </li>
-                        <li>
-                            <a href="#">Search</a>
+                            <form action="/result" method="post" class="navbar-form" style="margin-top: 10px">
+                                <input type="text"  class="form-control" style="height: 10px" id="search_word" name="search_word">
+                                <button  type="submit" class="navbar-btn ">Search</button>
+                            </form>
                         </li>
                         {{#if isAdmin}}
                             <li class="dropdown">
@@ -74,16 +67,13 @@
                                 </ul>
                             </li>
                         {{/if}}
-
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown"
                                role="button" aria-expanded="false">Profile<span
                                     class="caret"></span></a>
                             <ul class="dropdown-menu" role="menu">
-
                                 <li><a href="/user/details">My info</a></li>
                                 <li><a href="/user/logout">Logout</a></li>
-
                             </ul>
                         </li>
 
@@ -93,13 +83,6 @@
             {{#unless user}}
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav navbar-right">
-                        <li>
-                            <input type="text" class="form-control" style="margin-top: 20px; height: 10px">
-                        </li>
-                        <li>
-                            <a href="#">Search</a>
-                        </li>
-
                         <li><a href="/user/register">Register</a></li>
                         <li><a href="/user/login">Login</a></li>
                     </ul>

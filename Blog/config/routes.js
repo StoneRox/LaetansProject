@@ -26,7 +26,9 @@ module.exports = (app) => {
     app.get('/article/delete/:id', articleController.deleteGet);
     app.post('/article/delete/:id', articleController.deletePost);
     app.get('/tag/:name', tagController.listArticleByTag);
-    app.get('/user/details', userController.details);
+
+    //app.get('/result/?:search_word', articleController.searchTitles);
+    app.post('/result', articleController.searchTitles);
 
 
     app.use((req,res, next) => {
@@ -60,7 +62,7 @@ module.exports = (app) => {
 
     app.get('/admin/category/delete/:id',adminController.category.deleteGet);
     app.post('/admin/category/delete/:id', adminController.category.deletePost);
-
+    app.get('/user/details', userController.details);
 
 
 

@@ -180,5 +180,20 @@ module.exports = {
             article.prepareDelete();
             res.redirect('/');
         });
+    },
+
+    searchTitles: (req,res) => {
+        let searchWord = req.body;
+        let result = [];
+
+        Article.find({}).then(articles => {
+            for(let article of articles){
+
+                if(article.title.toLowerCase().indexOf(searchWord.search_word.toString().toLowerCase()) !== -1){
+                    result.push(article);
+                }
+            }
+            res.render('article/result', {result: result, search_word: searchWord.search_word})
+        });
     }
 };

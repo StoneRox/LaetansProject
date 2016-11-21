@@ -26,8 +26,6 @@ module.exports = {
                      res.render('home/article', {articles: category.articles, category: category, categories: categories});
                  })
              })
-
-
          });
      });
     }
