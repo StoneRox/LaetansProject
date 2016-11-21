@@ -1,0 +1,35 @@
+<div class="container body-content">
+    <div class="row">
+        <h3>Found {{result.length}} articles by "{{search_word}}"</h3>
+        {{#each result}}
+            <div class="col-md-6">
+                <article>
+                    <header>
+
+                        <h2>{{ this.title }}</h2>
+                    </header>
+                    {{#if this.picture}}
+                        <p>
+                            <img src="{{this.picture}}" alt="" width="500" onerror="this.style.display='none'">
+                        </p>
+                    {{/if}}
+                    <p>
+                        {{ this.content }}
+                    </p>
+
+                    <small class="author">
+                        {{ this.author.fullName }}
+                    </small>
+
+                    <footer>
+                        <div class="pull-right">
+                            <a class="btn btn-default btn-xs"
+
+                               href="/article/details/{{this.id}}">Read more &raquo;</a>
+                        </div>
+                    </footer>
+                </article>
+            </div>
+        {{/each}}
+    </div>
+</div>
