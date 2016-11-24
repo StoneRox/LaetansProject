@@ -4,29 +4,8 @@
     <option name="SCOPE_TYPE" value="3" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="280306d9-ed72-4c6b-9064-37a27eeec051" name="Default" comment="Add search for users...&#10;Add avatars support...&#10;Add contacts list...&#10;Add inspect other users function...&#10;Add functionality for adding and removing contacts...&#10;Add user custom info section in the user profile page...&#10;Add show articles by user functionality...&#10;Minor visual changes...&#10;">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/avatar_default.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/controllers/search.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/views/searchResult/result.hbs" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/views/user/contacts.hbs" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/views/user/otherProfile.hbs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" />
+    <list default="true" id="280306d9-ed72-4c6b-9064-37a27eeec051" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/database.js" afterPath="$PROJECT_DIR$/config/database.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/routes.js" afterPath="$PROJECT_DIR$/config/routes.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/controllers/admin/user.js" afterPath="$PROJECT_DIR$/controllers/admin/user.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/controllers/article.js" afterPath="$PROJECT_DIR$/controllers/article.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/controllers/user.js" afterPath="$PROJECT_DIR$/controllers/user.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/models/User.js" afterPath="$PROJECT_DIR$/models/User.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/stylesheets/style.css" afterPath="$PROJECT_DIR$/public/stylesheets/style.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/admin/user/edit.hbs" afterPath="$PROJECT_DIR$/views/admin/user/edit.hbs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/article/details.hbs" afterPath="$PROJECT_DIR$/views/article/details.hbs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/home/article.hbs" afterPath="$PROJECT_DIR$/views/home/article.hbs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/layout.hbs" afterPath="$PROJECT_DIR$/views/layout.hbs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/tag/details.hbs" afterPath="$PROJECT_DIR$/views/tag/details.hbs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/user/details.hbs" afterPath="$PROJECT_DIR$/views/user/details.hbs" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/models/Articles.js" afterPath="$PROJECT_DIR$/models/Article.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/views/article/result.hbs" afterPath="$PROJECT_DIR$/views/user/articles.hbs" />
     </list>
     <ignored path="SoftUniBlog.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -735,7 +714,7 @@
       <workItem from="1479894463720" duration="342000" />
       <workItem from="1479914047855" duration="31000" />
       <workItem from="1479914132770" duration="2977000" />
-      <workItem from="1479973512662" duration="33172000" />
+      <workItem from="1479973512662" duration="33254000" />
     </task>
     <task id="LOCAL-00001" summary="Create result.hbs">
       <created>1479730491285</created>
@@ -758,11 +737,18 @@
       <option name="project" value="LOCAL" />
       <updated>1479730809717</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Add search for users...&#10;Add avatars support...&#10;Add contacts list...&#10;Add inspect other users function...&#10;Add functionality for adding and removing contacts...&#10;Add user custom info section in the user profile page...&#10;Add show articles by user functionality...&#10;Minor visual changes...&#10;">
+      <created>1480009714761</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1480009714761</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="282032000" />
+    <option name="totallyTimeSpent" value="282114000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
