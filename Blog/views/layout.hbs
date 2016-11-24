@@ -27,8 +27,9 @@
                     <span class="icon-bar"></span>
                 </button>
             </div>
+
             {{#if categories}}
-                <ul class="nav navbar-nav navbar-left">
+                <ul class="nav navbar-nav navbar-left navbar-collapse collapse">
 
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown"
@@ -42,6 +43,7 @@
                     </li>
                 </ul>
             {{/if}}
+
             {{#if user}}
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav navbar-left">
@@ -53,7 +55,7 @@
                         <li>
                             <form action="/result" method="post" class="navbar-form" style="margin-top: 10px">
                                 <input type="text"  class="form-control" style="height: 10px" id="search_word" name="search_word">
-                                <button  type="submit" class="navbar-btn ">Search</button>
+                                <button  type="submit" class="navbar-btn img-rounded">Search</button>
                             </form>
                         </li>
                         {{#if isAdmin}}
@@ -69,10 +71,11 @@
                         {{/if}}
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown"
-                               role="button" aria-expanded="false">Profile<span
+                               role="button" aria-expanded="false">{{user.fullName}}<span
                                     class="caret"></span></a>
                             <ul class="dropdown-menu" role="menu">
                                 <li><a href="/user/details">My info</a></li>
+                                <li><a href="/user/contacts">My contacts</a></li>
                                 <li><a href="/user/logout">Logout</a></li>
                             </ul>
                         </li>
@@ -98,7 +101,7 @@
 {{{body}}}
 </body>
 <footer>
-    <div class="container modal-footer">
+    <div class="container modal-footer ">
         <p>&copy; 2016 - Laetans</p>
     </div>
 </footer>

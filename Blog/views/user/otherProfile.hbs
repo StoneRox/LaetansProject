@@ -1,0 +1,41 @@
+<div class="container body-content">
+    <div class="row">
+    <p>
+        <img src="{{user_inspect.avatar}}" class="avatar-lg img-rounded"
+             onerror="this.src='/images/avatar_default.jpg'">
+        {{#unless inContacts}}
+            {{#unless isThis}}
+                <form action="/user/details/{{id}}" method="post">
+                    <input type="hidden" name="contact_id" value="{{id}}">
+                    <input class="img-rounded alert-info" type="submit" value="Add to contacts">
+                </form>
+            {{/unless}}
+        {{/unless}}
+        {{#if inContacts}}
+            <button class="img-rounded alert-danger" onclick="remove_contact.hidden=false">Remove from contacts</button>
+            <form action="/user/details/{{id}}" method="post" id="remove_contact" hidden>
+                <input type="hidden" name="remove_contact_id" value="{{id}}">
+                <br>
+                Are you sure you want to remove this contact?
+                <br>
+                <input class="img-rounded alert-danger" type="submit" value="Yes">
+                <button type="reset" class="img-rounded alert-info" onclick="remove_contact.hidden=true">No</button>
+            </form>
+        {{/if}}
+        <p>
+            Email: {{user_inspect.email}}
+        </p>
+        <p>
+            Name: {{user_inspect.fullName}}
+        </p>
+        <p>
+            Number of articles: <a href="/user/{{id}}/articles">{{user_inspect.articles}}</a>
+        </p>
+        <p>
+            {{user_inspect.fullName}}'s custom info:
+            <br>
+            <textarea maxlength="999" class="lg img-rounded" name="user_info" id="user_info" cols="12" rows="10"
+                      disabled>{{user_inspect.userInformation}}
+            </textarea>
+    </div>
+</div>

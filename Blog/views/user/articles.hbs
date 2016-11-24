@@ -1,11 +1,10 @@
 <div class="container body-content">
+    <h1>Articles by {{ user_author }}</h1>
     <div class="row">
-        <h3>Found {{result.length}} articles by "{{search_word}}"</h3>
-        {{#each result}}
+        {{#each articles}}
             <div class="col-md-6">
                 <article>
                     <header>
-
                         <h2>{{ this.title }}</h2>
                     </header>
                     {{#if this.picture}}
@@ -16,20 +15,15 @@
                     <p>
                         {{ this.content }}
                     </p>
-
-                    <small class="author">
-                        {{ this.author.fullName }}
-                    </small>
-
                     <footer>
                         <div class="pull-right">
                             <a class="btn btn-default btn-xs"
-
-                               href="/article/details/{{this.id}}">Read more &raquo;</a>
+                               href="/article/details/{{this.id}}">Read
+                                more &raquo;</a>
                         </div>
                     </footer>
                 </article>
             </div>
-        {{/each}}
+        {{/ each}}
     </div>
 </div>

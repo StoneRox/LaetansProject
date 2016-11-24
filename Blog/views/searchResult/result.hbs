@@ -1,0 +1,58 @@
+<div class="container row">
+    <details>
+        <summary>
+            Found {{result.resultArticles.length}} articles by"{{search_word}}"
+        </summary>
+        <div>
+            {{#each result.resultArticles}}
+                <div class="col-md-6">
+                    <article>
+                        <header>
+
+                            <h2>{{ this.title }}</h2>
+                        </header>
+                        {{#if this.picture}}
+                            <p>
+                                <img class="img-responsive img-rounded" src="{{this.picture}}"
+                                     onerror="this.style.display='none'">
+                            </p>
+                        {{/if}}
+                        <p>
+                            {{ this.content }}
+                        </p>
+
+                        <small class="author">
+                            {{ this.author.fullName }}
+                        </small>
+
+                        <footer>
+                            <div class="pull-right">
+                                <a class="btn btn-default btn-xs"
+
+                                   href="/article/details/{{this.id}}">Read more &raquo;</a>
+                            </div>
+                        </footer>
+                    </article>
+                </div>
+            {{/each}}
+        </div>
+    </details>
+</div>
+<div class="container row">
+    <details>
+        <summary>
+            Found {{result.resultUsers.length}} users by"{{search_word}}"
+        </summary>
+        <div>
+            {{#each result.resultUsers}}
+                <a href="/user/details/{{this.id}}" class="users-srch">
+                    <img class="avatar-sm img-rounded" src="{{this.avatar}}" onerror="this.src='/images/avatar_default.jpg'">
+                    {{this.fullName}}
+                </a>
+                <br>
+            {{/each}}
+        </div>
+    </details>
+</div>
+
+

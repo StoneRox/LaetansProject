@@ -1,0 +1,9 @@
+<div >
+    {{#each contacts_names}}
+        <a href="/user/details/{{this.id}}" class="users-srch">
+            <img class="avatar-sm img-rounded" src="{{this.avatar}}" onerror="this.src='/images/avatar_default.jpg'">
+            {{this.name}}
+        </a>
+        <br>
+    {{/each}}
+</div>

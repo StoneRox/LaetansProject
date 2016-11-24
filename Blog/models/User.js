@@ -10,6 +10,9 @@ let userSchema = mongoose.Schema(
         salt: {type: String, required: true},
         articles: [{type: mongoose.Schema.ObjectId, ref: 'Article'}],
         roles: [{type: mongoose.Schema.Types.ObjectId, ref: 'Role'}],
+        avatar: {type: String, required: false, default: '/images/avatar_default.jpg'},
+        userInformation: {type: String, required: false},
+        contacts: [{type: String, required: false}],
 
     }
 );

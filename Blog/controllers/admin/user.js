@@ -24,7 +24,7 @@ module.exports = {
                         role.isChecked = true;
                     }
                 }
-                res.render('admin/user/edit', {user: user, roles: roles})
+                res.render('admin/user/edit', {user_edit: user, roles: roles})
             })
         });
     },

@@ -3,7 +3,7 @@ const homeController = require('./../controllers/home');
 const articleController = require('./../controllers/article');
 const adminController = require('./../controllers/admin/admin');
 const tagController = require('./../controllers/tag');
-
+const searchController = require('./../controllers/search');
 
 
 
@@ -27,12 +27,23 @@ module.exports = (app) => {
     app.post('/article/delete/:id', articleController.deletePost);
     app.get('/tag/:name', tagController.listArticleByTag);
 
-    //app.get('/result/?:search_word', articleController.searchTitles);
-    app.post('/result', articleController.searchTitles);
+    app.use((req,res, next) => {
+        if (req.isAuthenticated()){
+            next();
+        } else {
+            res.redirect('/user/login');
+        }
+    });
+    app.post('/result', searchController.searchTitlesAndUsers);
+    app.get('/user/details', userController.details);
+    app.post('/user/details', userController.changeUserInfo);
+    app.get('/user/contacts', userController.contactsGet);
+    app.get('/user/details/:id', userController.inspectProfile);
+    app.post('/user/details/:id', userController.contactsPost);
+    app.get('/user/:id/articles', userController.articlesByUser);
 
 
     app.use((req,res, next) => {
-        if (req.isAuthenticated()){
             req.user.isInRole('Admin').then(isAdmin => {
                 if(isAdmin){
                     next();
@@ -40,9 +51,6 @@ module.exports = (app) => {
                     res.redirect('/');
                 }
             })
-        } else {
-            res.redirect('/user/login');
-        }
     });
     app.get('/admin/user/all', adminController.user.all);
 
@@ -62,10 +70,5 @@ module.exports = (app) => {
 
     app.get('/admin/category/delete/:id',adminController.category.deleteGet);
     app.post('/admin/category/delete/:id', adminController.category.deletePost);
-    app.get('/user/details', userController.details);
-
-
-
-
 };
 
