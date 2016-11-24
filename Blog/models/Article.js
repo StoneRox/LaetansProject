@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-//Article model should be renamed to "Article" to fit the naming convention between the other models. TODO: check on calls in the code to this model before rename.
+
 
 let articleSchema = mongoose.Schema(
     {
