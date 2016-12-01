@@ -11,7 +11,6 @@
             <input class="img-rounded" id="avatar_url" name="avatar_url" type="text" value="{{avatar}}">
         <input type="submit" class="alert-success img-rounded" onclick="avatar_change.hidden=true;" value="Save"/>
         </form>
-        </p>
         <p>
             Email: {{email}}
         </p>
@@ -36,11 +35,12 @@
         <script>
             $(document).ready(function() {
                 $('#user_info').keyup(function() {
-                    var text_length = 999 - $('#user_info').val().length;
+                    let text_length = 999 - $('#user_info').val().length;
                     $('#textarea_feedback').html(text_length + ' characters remaining');
                 });
             });
         </script>
         <button id="change_user_info" class="alert-info img-rounded" onclick="user_info.disabled=false; custom_info_btns.hidden=false; this.hidden=true">Change info</button>
+        <a href="/user/delete"> <button id="deleteProfileButton" class="alert-danger img-rounded">Delete Profile</button></a>
     </div>
 </div>

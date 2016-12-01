@@ -41,6 +41,8 @@ module.exports = (app) => {
     app.get('/user/details/:id', userController.inspectProfile);
     app.post('/user/details/:id', userController.contactsPost);
     app.get('/user/:id/articles', userController.articlesByUser);
+    app.get('/user/delete/', userController.deleteProfileGet);
+    app.post('/user/delete/', userController.deleteProfilePost);
 
 
     app.use((req,res, next) => {
