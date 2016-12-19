@@ -1,0 +1,45 @@
+<div class="container body-content">
+    <div align="center">
+        <div class="col-md-12">
+            <article>
+                <header>
+                    <h2>{{event.title}}</h2>
+                </header>
+                {{#if event.picture}}
+                    <p>
+                        <img class="img-responsive img-rounded" src="{{event.picture}}" alt="" onerror="this.style.display='none'">
+                    </p>
+                {{/if}}
+                <p>
+                    {{event.description}}
+                </p>
+                <small class="...">
+                    Event host: {{event.author.fullName}}
+                    <p>
+                        Starts on:
+                        {{event.eventStart}}
+                        Ends on:
+                        {{event.eventEnd}}
+                    </p>
+                </small>
+                {{#if event.attendanceLimit}}
+                    <p class="text-warning">
+                        Limit for attendance: {{event.attendanceLimit}}
+                    </p>
+                {{/if}}
+                <footer>
+
+                    <div class="pull-right">
+                        {{#if isUserAuthorized}}
+                            <a class="btn btn-success btn-xs"
+                               href="/event/edit/{{article.id}}">Edit &raquo;</a>
+                            <a class="btn btn-danger btn-xs"
+                               href="/event/delete/{{article.id}}">Delete &raquo;</a>
+                        {{/if}}
+                        <a class="btn btn-default btn-xs" href="/">Back &raquo;</a>
+                    </div>
+                </footer>
+            </article>
+        </div>
+    </div>
+</div>

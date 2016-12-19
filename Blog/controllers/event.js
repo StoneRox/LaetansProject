@@ -38,5 +38,22 @@ module.exports = {
         Event.find({}).then(events => {
             res.render('event/list', {events: events});
         })
-    }
+    },
+
+    details: (req, res) => {
+        //TODO: Bug - if you specified an invalid picture location when creating the event, console logs error. Currently we only check if the passed value is null.
+        let id = req.params.id;
+
+        Event.findById(id).then(event => {
+            if (!req.user.isEventAuthor(event)){
+                res.render('event/details', {event: event, isUserAuthorized: false});
+                return;
+            }
+
+            req.user.isInRole('Admin').then(isAdmin => {
+                let isUserAuthorized = isAdmin || req.user.isEventAuthor(event);
+                res.render('event/details', {event: event, isUserAuthorized: isUserAuthorized});
+            })
+        })
+    },
 };

@@ -48,6 +48,7 @@ module.exports = (app) => {
     app.get('/event/create', eventController.createGet);
     app.post('/event/create', eventController.createPost);
     app.get('/event/list', eventController.listAll);
+    app.get('/event/details/:id', eventController.details);
 
 
     app.use((req,res, next) => {

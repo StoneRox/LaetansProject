@@ -32,6 +32,14 @@ userSchema.method({
         let isAuthor = article.author.equals(this.id);
         return isAuthor;
     },
+
+    isEventAuthor: function (event) {
+        if (!event) {
+            return false;
+        }
+        let isAuthor = event.author.equals(this.id);
+        return isAuthor;
+    },
     isInRole: function (roleName) {
         return Role.findOne({name: roleName}).then(role => {
             if (!role) {
