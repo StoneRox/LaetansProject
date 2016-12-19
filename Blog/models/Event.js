@@ -14,6 +14,14 @@ let eventSchema = mongoose.Schema({
 });
 
 eventSchema.method({
+    isExpired: function (event) {
+        if (!event){
+            console.log("isExpired got wrong data");
+            return false;
+        }
+        let isExpired = ((event.eventEnd < Date.now()) && (event.status != "Cancelled"));
+        return isExpired;
+    }
 
 });
 

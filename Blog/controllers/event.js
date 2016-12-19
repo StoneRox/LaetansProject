@@ -36,7 +36,22 @@ module.exports = {
 
     listAll: (req, res) => {
         Event.find({}).then(events => {
-            res.render('event/list', {events: events});
+            let upcomingEvents = [];
+            let expiredEvents = [];
+            let cancelledEvents= [];
+            events.forEach( function (entry) {
+                if (entry.status == "Upcoming"){
+                    upcomingEvents.push(entry)
+                }
+                else if (entry.status == "Over"){
+                    expiredEvents.push(entry);
+                }
+                else if(entry.status == "Cancelled"){
+                    cancelledEvents.push(entry);
+                }
+            });
+            //res.render('event/list', {events: events});
+            res.render('event/list', {upcomingEvents: upcomingEvents, expiredEvents: expiredEvents, cancelledEvents: cancelledEvents});
         })
     },
 
@@ -44,7 +59,17 @@ module.exports = {
         //TODO: Bug - if you specified an invalid picture location when creating the event, console logs error. Currently we only check if the passed value is null.
         let id = req.params.id;
 
+        //compromise - Localhosting doesn't have cronjobs, and I can't find how to schedule a check to see if event expired to update the status in the DB.
+        // that's why we are making the check and update when opening up the details on the event.
+
         Event.findById(id).populate('author').then(event => {
+
+            //update status
+            if (event.isExpired(event)){
+                event.status = "Over";
+                event.save();
+            }
+
             if (!req.user.isEventAuthor(event)){
                 res.render('event/details', {event: event, isUserAuthorized: false});
                 return;

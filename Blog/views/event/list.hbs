@@ -18,7 +18,67 @@
                 </tr>
                 </thead>
                 <tbody>
-                {{#each events}}
+                {{#each upcomingEvents}}
+                    <tr>
+                        <td>{{ this.title }}</td>
+                        <td>{{ this.location }}</td>
+                        <td>{{ this.eventStart }}</td>
+                        <td>{{ this.eventEnd }}</td>
+                        <td>
+                            <a href="/event/details/{{this.id}}">Details</a>
+                        </td>
+                    </tr>
+                {{/each}}
+                </tbody>
+            </table>
+        </div>
+
+
+    </div>
+
+    <div class="well">
+        <h3>Expired Events</h3>
+        <div class="row">
+            <table class="table table-hover ">
+                <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Location</th>
+                    <th>Starts on</th>
+                    <th>Ends on</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                {{#each expiredEvents}}
+                    <tr>
+                        <td>{{ this.title }}</td>
+                        <td>{{ this.location }}</td>
+                        <td>{{ this.eventStart }}</td>
+                        <td>{{ this.eventEnd }}</td>
+                        <td>
+                            <a href="/event/details/{{this.id}}">Details</a>
+                        </td>
+                    </tr>
+                {{/each}}
+                </tbody>
+            </table>
+        </div>
+
+        <h3 class="text-warning">Cancelled Events</h3>
+        <div class="row">
+            <table class="table table-hover ">
+                <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Location</th>
+                    <th>Starts on</th>
+                    <th>Ends on</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                {{#each cancelledEvents}}
                     <tr>
                         <td>{{ this.title }}</td>
                         <td>{{ this.location }}</td>
@@ -33,4 +93,5 @@
             </table>
         </div>
     </div>
+
 </div>
