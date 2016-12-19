@@ -27,8 +27,16 @@ module.exports = {
 
         Event.create(eventArgs).then(event => {
             req.user.events.push(event.id);
-            req.user.save();
+            req.user.save((err)=>{
+                console.log(err);
+            });
             res.redirect('/')
+        })
+    },
+
+    listAll: (req, res) => {
+        Event.find({}).then(events => {
+            res.render('event/list', {events: events});
         })
     }
 };
