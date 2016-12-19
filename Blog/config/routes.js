@@ -4,6 +4,7 @@ const articleController = require('./../controllers/article');
 const adminController = require('./../controllers/admin/admin');
 const tagController = require('./../controllers/tag');
 const searchController = require('./../controllers/search');
+const eventController = require('./../controllers/event');
 
 
 
@@ -43,6 +44,9 @@ module.exports = (app) => {
     app.get('/user/:id/articles', userController.articlesByUser);
     app.get('/user/delete/', userController.deleteProfileGet);
     app.post('/user/delete/', userController.deleteProfilePost);
+
+    app.get('/event/create', eventController.createGet);
+    app.post('/event/create', eventController.createPost);
 
 
     app.use((req,res, next) => {

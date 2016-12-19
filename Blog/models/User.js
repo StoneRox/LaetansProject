@@ -13,6 +13,7 @@ let userSchema = mongoose.Schema(
         avatar: {type: String, required: false, default: '/images/avatar_default.jpg'},
         userInformation: {type: String, required: false},
         contacts: [{type: String, required: false}],
+        events: [{type: mongoose.Schema.ObjectId, ref: 'Event'}],
 
     }
 );
