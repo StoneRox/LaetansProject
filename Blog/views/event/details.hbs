@@ -10,14 +10,26 @@
                         <img class="img-responsive img-rounded" src="{{event.picture}}" alt="" onerror="this.style.display='none'">
                     </p>
                 {{/if}}
+
+                <!-- TODO: different colors for different status. Why not implemented? Handlebars doesn't internally support conditional statements. Need to use block helper as shown here: http://stackoverflow.com/questions/8853396/logical-operator-in-a-handlebars-js-if-conditional -->
+                <p class="text-success">
+                    {{event.status}}
+                </p>
+
                 <p>
                     {{event.description}}
                 </p>
+
+                <p>
+                    Confirmed guests: {{event.attendees.length}}
+                </p>
+
                 <small class="...">
-                    Event host: {{event.author.fullName}}
+                    Event created by: {{event.author.fullName}}
                     <p>
                         Starts on:
                         {{event.eventStart}}
+                        <br />
                         Ends on:
                         {{event.eventEnd}}
                     </p>
@@ -36,7 +48,7 @@
                             <a class="btn btn-danger btn-xs"
                                href="/event/delete/{{article.id}}">Delete &raquo;</a>
                         {{/if}}
-                        <a class="btn btn-default btn-xs" href="/">Back &raquo;</a>
+                        <a class="btn btn-default btn-xs" href="/event/list">Back &raquo;</a>
                     </div>
                 </footer>
             </article>

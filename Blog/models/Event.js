@@ -10,7 +10,7 @@ let eventSchema = mongoose.Schema({
     picture: {type: String, required: false},
     eventStart: {type: Date, default: Date.now},
     eventEnd: {type: Date, default: Date.now},
-    status: {type: String, default: "Upcoming"}
+    status: {type: String, default: "Upcoming"}, //statuses: upcoming, live_now, over, cancelled
 });
 
 eventSchema.method({

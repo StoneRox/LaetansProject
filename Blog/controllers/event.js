@@ -44,7 +44,7 @@ module.exports = {
         //TODO: Bug - if you specified an invalid picture location when creating the event, console logs error. Currently we only check if the passed value is null.
         let id = req.params.id;
 
-        Event.findById(id).then(event => {
+        Event.findById(id).populate('author').then(event => {
             if (!req.user.isEventAuthor(event)){
                 res.render('event/details', {event: event, isUserAuthorized: false});
                 return;
