@@ -1,7 +1,5 @@
 const mongoose = require('mongoose');
 
-//Article model should be renamed to "Article" to fit the naming convention between the other models. TODO: check on calls in the code to this model before rename.
-
 let articleSchema = mongoose.Schema(
     {
         title: {type: String, required: true},
@@ -10,6 +8,7 @@ let articleSchema = mongoose.Schema(
         category: {type: mongoose.Schema.Types.ObjectId, required: true, ref: 'Category'},
         tags: [{type: mongoose.Schema.Types.ObjectId, required: true, ref: 'Tag'}],
         picture: {type: String, required: false},
+        articleComments: [{type: mongoose.Schema.ObjectId, ref: 'Comment'}],
         date: {type: Date, default: Date.now}
     }
 );
@@ -65,6 +64,17 @@ articleSchema.method({
                     tag.save();
                 }
             });
+        }
+
+        let Comment = mongoose.model('Comment');
+        for(let comment of this.articleComments)
+        {
+            Comment.findOneAndRemove({_id: comment}).then(c => {
+                User.findById(c.author).then(user => {
+                    user.userComments.remove(comment);
+                    user.save();
+                })
+            })
         }
     },
 

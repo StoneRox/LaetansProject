@@ -13,7 +13,7 @@ let userSchema = mongoose.Schema(
         avatar: {type: String, required: false, default: '/images/avatar_default.jpg'},
         userInformation: {type: String, required: false},
         contacts: [{type: String, required: false}],
-
+        userComments:  [{type: mongoose.Schema.ObjectId, ref: 'Comment'}],
     }
 );
 
@@ -62,6 +62,21 @@ userSchema.method({
             Article.findById(article).then(article => {
                 article.prepareDelete();
                 article.remove();
+            })
+        }
+        for(let contact of this.contacts){
+            User.findById(contact).then(c => {
+                c.contacts.splice(c.contacts.indexOf(this.id),1);
+                c.save();
+            })
+        }
+        let Comment = mongoose.model('Comment');
+        for(let comment of this.userComments){
+            Comment.findById(comment).then( c => {
+                Article.findById(c.article).then(a => {
+                    a.articleComments.splice(a.articleComments.indexOf(comment),1);
+                    c.remove();
+                })
             })
         }
     },

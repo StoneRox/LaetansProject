@@ -8,13 +8,29 @@
 </head>
 <body>
 <header>
+    <script>
+        function clock() {
+
+            function start() {
+                let timerInterval = setInterval(changeValue, 1000);
+            }
+            function changeValue() {
+                let time = new Date();
+                time = time.toLocaleTimeString();
+                time = time.toString();
+                document.getElementById("timeNow").innerHTML = time.toString();
+            }
+            start();
+        }
+    </script>
+
     <div class="navbar navbar-default navbar-fixed-top ">
         <div class="container">
             <div class="navbar-header">
                 <a href="/" >
                     <div class="navbar-brand">
                         <img class="logo" src="/images/Dragon_Eye.jpg" style="margin-top: -15px" height="50"
-                        onmouseover="this.src = '/images/blue.jpg'" onmouseout="this.src='/images/Dragon_Eye.jpg'"/>
+                        onmouseover="this.src = '/images/blue.jpg'" onmouseout="this.src='/images/Dragon_Eye.jpg'" onload="clock()"/>
                     </div>
 
                     <div class="navbar-brand">
@@ -30,7 +46,6 @@
 
             {{#if categories}}
                 <ul class="nav navbar-nav navbar-left navbar-collapse collapse">
-
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown"
                            role="button" aria-expanded="false">Categories<span
@@ -43,7 +58,7 @@
                     </li>
                 </ul>
             {{/if}}
-
+            <div align="center" style="margin-top: 1.75%" class="text-info nav navbar-nav navbar-collapse collapse" id="timeNow"></div>
             {{#if user}}
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav navbar-left">

@@ -7068,7 +7068,36 @@ textarea.lg{
     background: gainsboro;
     display: inline-block;
     padding: 4px ;
+    border-radius: 5px;
 }
 .avatar-box:hover{
     background: lightblue;
 }
+textarea.comment{
+  max-width: 60%;
+  max-height: 120px;
+  width: 60%;
+  height: 120px;
+}
+.link-like-red:hover{
+    cursor: pointer;
+    color: red;
+}
+.link-like-lblue:hover{
+    cursor: pointer;
+    color: blue;
+}
+.Description{
+  position: absolute;
+  visibility: hidden;
+  opacity: 0;
+}
+.useDescription:hover .Description {
+  visibility: visible;
+  opacity: 1;
+  background: aliceblue;
+  border: 2px lightgoldenrodyellow solid;
+
+  border-radius: 3px;
+}
+

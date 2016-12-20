@@ -119,7 +119,8 @@ module.exports = {
                 fullName: userFound.fullName,
                 articles: userFound.articles.length,
                 avatar: userFound.avatar,
-                userInformation: userFound.userInformation
+                userInformation: userFound.userInformation,
+                userComments: userFound.userComments
             };
             let inContacts = false;
             if(thisUser.contacts.indexOf(userFound.id) !== -1){
@@ -171,13 +172,42 @@ module.exports = {
         if(body.contact_id){
             user.contacts.push(body.contact_id);
             user.save();
+            User.findById(body.contact_id).then(contact => {
+                contact.contacts.push(user.id);
+                contact.save();
+            });
             res.redirect(`/user/details/${body.contact_id}`);
         }
         if(body.remove_contact_id){
             let index = user.contacts.indexOf(body.remove_contact_id);
             user.contacts.splice(index,1);
             user.save();
+            User.findById(body.remove_contact_id).then(contact => {
+                contact.contacts.splice(contact.indexOf(user.id),1);
+                contact.save();
+            });
             res.redirect(`/user/details/${body.remove_contact_id}`);
         }
     },
+
+    userCommentsGet: (req, res) => {
+        let id = req.params.id;
+        User.findById(id).populate('userComments').then(user => {
+            let comments = user.userComments;
+            let editable = false;
+            for(let comment of comments){
+                comment.dateTime = comment.date.toLocaleDateString() + ' ' + comment.date.toLocaleTimeString();
+                Article.findById(comment.article).then(article => {
+                    comment.article.title = article.title;
+                });
+                user.isInRole('Admin').then(isAdmin => {
+                    if(isAdmin || req.user.id == user.id){
+                        comment.editable = true;
+                    }
+                });
+            }
+            res.render(`user/comments`, {comments: comments, author: user});
+        });
+
+    }
 };

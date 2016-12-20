@@ -32,6 +32,9 @@
             Number of articles: <a href="/user/{{id}}/articles">{{user_inspect.articles}}</a>
         </p>
         <p>
+            Number of comments: <a href="/user/{{id}}/comments">{{user_inspect.userComments.length}}</a>
+        </p>
+        <p>
             {{user_inspect.fullName}}'s custom info:
             <br>
             <textarea maxlength="999" class="lg img-rounded" name="user_info" id="user_info" cols="12" rows="10"

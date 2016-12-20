@@ -1,5 +1,8 @@
+const Comment = require('mongoose').model('Comment');
 const Article = require('mongoose').model('Article');
 const Category = require('mongoose').model('Category');
+const User = require('mongoose').model('User');
+
 const initializeTags = require('./../models/Tag').initializeTags;
 
 module.exports = {
@@ -31,9 +34,10 @@ module.exports = {
         articleArgs.tags = [];
 
 
-
         Article.create(articleArgs).then(article => {
-            let tagNames = articleArgs.tagNames.split(/\s+|,/).filter(tag => {return tag});
+            let tagNames = articleArgs.tagNames.split(/\s+|,/).filter(tag => {
+                return tag
+            });
 
             initializeTags(tagNames, article.id);
             article.prepareInsert();
@@ -43,17 +47,43 @@ module.exports = {
     details: (req, res) => {
         let id = req.params.id;
 
-        Article.findById(id).populate('author tags').then(article => {
+        Article.findById(id).populate('author tags articleComments').then(article => {
+            for (let i = 0; i < article.articleComments.length; i++) {
+                User.findById(article.articleComments[i].author).then(user => {
+
+                    article.articleComments[i].author = user;
+                    article.articleComments[i].datetime =
+                        article.articleComments[i].date.toLocaleDateString()
+                        + ' ' +
+                        article.articleComments[i].date.toLocaleTimeString();
+
+
+                    if (req.user) {
+                        req.user.isInRole('Admin').then(isAdmin => {
+                            if(isAdmin || req.user.id == user.id){
+                                article.articleComments[i].editable = true;
+                            }
+                        });
+                    }
+                })
+            }
+            let date =  article.date.toLocaleDateString() +' ' + article.date.toLocaleTimeString();
             if (!req.user) {
                 Category.find({}).then(categories => {
-                    res.render('article/details', {article: article, isUserAuthorized: false, categories: categories});
+                    res.render('article/details', {article: article, isUserAuthorized: false, categories: categories, date: date});
                 });
                 return;
             }
             req.user.isInRole('Admin').then(isAdmin => {
                 let isUserAuthorized = isAdmin || req.user.isAuthor(article);
                 Category.find({}).then(categories => {
-                    res.render('article/details', {article: article, isUserAuthorized: isUserAuthorized, categories: categories});
+                    res.render('article/details', {
+                        article: article,
+                        isUserAuthorized: isUserAuthorized,
+                        categories: categories,
+                        loggedUser: true,
+                        date: date
+                    });
                 })
             });
         });
@@ -76,7 +106,9 @@ module.exports = {
                 }
                 Category.find({}).then(categories => {
                     article.categories = categories;
-                    article.tagNames = article.tags.map(tag => {return tag.name});
+                    article.tagNames = article.tags.map(tag => {
+                        return tag.name
+                    });
                     res.render('article/edit', article);
                 });
 
@@ -120,11 +152,15 @@ module.exports = {
                 article.content = articleArgs.content;
                 article.picture = articleArgs.picture;
 
-                let newTagNames = articleArgs.tags.split(/\s+|,/).filter(tag => {return tag});
+                let newTagNames = articleArgs.tags.split(/\s+|,/).filter(tag => {
+                    return tag
+                });
 
-                let oldTags = article.tags.filter(tag => {return newTagNames.indexOf(tag.name) === -1;});
+                let oldTags = article.tags.filter(tag => {
+                    return newTagNames.indexOf(tag.name) === -1;
+                });
 
-                for(let tag of oldTags){
+                for (let tag of oldTags) {
                     tag.deleteArticle(article.id);
                     article.deleteTag(tag.id);
                 }
@@ -166,7 +202,9 @@ module.exports = {
                 }
 
                 Category.findOne({articles: article}).then(category => {
-                    article.tagNames = article.tags.map(tag => {return tag.name});
+                    article.tagNames = article.tags.map(tag => {
+                        return tag.name
+                    });
                     res.render('article/delete', {article: article, category: category});
                 })
 
@@ -181,5 +219,44 @@ module.exports = {
             res.redirect('/');
         });
     },
+
+    commentPost: (req, res) => {
+        let body = req.body;
+        if (!body.comment_id) {
+            let user = req.user.id;
+            let commentArgs = {};
+            commentArgs.content = body.content;
+            commentArgs.author = user;
+            commentArgs.article = body.article_id;
+
+            Comment.create(commentArgs).then(comment => {
+                Article.findById(body.article_id).then(article => {
+                    article.articleComments.push(comment.id)
+                    article.save();
+                    req.user.userComments.push(comment.id);
+                    req.user.save();
+                });
+            });
+        }
+        else {
+            let commentId = body.comment_id;
+            let articleId = body.article_id;
+            Comment.findById(commentId).then(c => {
+                    Article.findById(articleId).then(article => {
+                        article.articleComments.splice(article.articleComments.indexOf(commentId), 1);
+                        article.save();
+                        User.findById(c.author).then(user => {
+                            user.userComments.splice(user.userComments.indexOf(c.id),1);
+                            user.save();
+                        });
+                        c.remove();
+                    })
+            }
+            );
+        }
+        res.redirect('back');
+        //res.redirect(`/article/details/${body.article_id}`);
+    },
+
 
 };

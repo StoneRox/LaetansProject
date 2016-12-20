@@ -7,29 +7,33 @@
                 </header>
                 {{#if article.picture}}
                     <p>
-                        <img class="img-responsive img-rounded" src="{{article.picture}}" alt="" width="500" onerror="this.style.display='none'">
+                        <img class="img-responsive img-rounded" src="{{article.picture}}" alt="" width="500"
+                             onerror="this.style.display='none'">
                     </p>
                 {{/if}}
-                <p>
+                <p style="text-align: justify; width: 80%; text-align-last: center">
                     {{article.content}}
                 </p>
                 <small class="author">
-                    {{article.author.fullName}}
+                    <img class="avatar-sm img-rounded" src="{{article.author.avatar}}" onerror="this.src='/images/avatar_default.jpg'">
+                    <a href="/user/details/{{article.author.id}}" >
+                        {{article.author.fullName}}
+                    </a>
                     <p>
                         Created on:
                         <br>
-                        {{article.date}}
+                        {{date}}
                     </p>
 
                 </small>
                 <footer>
-                    <div >
+                    <div>
                         {{# each article.tags}}
                             <a class="btn btn-default btn-xs"
                                href="/tag/{{this.name}}">{{ this.name }}</a>
                         {{/each}}
                     </div>
-
+                    <br>
                     <div class="pull-right">
                         {{#if isUserAuthorized}}
                             <a class="btn btn-success btn-xs"
@@ -38,6 +42,58 @@
                                href="/article/delete/{{article.id}}">Delete &raquo;</a>
                         {{/if}}
                         <a class="btn btn-default btn-xs" href="/">Back &raquo;</a>
+                    </div>
+                    {{#if loggedUser}}
+                        <br>
+                        <br>
+                        <div align="center">
+                            <button class="alert-success img-rounded" id="show_comment_form"
+                                    onclick="comment_form.hidden = false; this.hidden = true">Comment
+                            </button>
+                            <form hidden id="comment_form" method="post">
+                                <div align="center">
+                        <textarea name="content" id="content" class="comment img-rounded"
+                                  maxlength="400" cols="30" rows="10" required></textarea>
+                                    <input name="article_id" type="hidden" value="{{article.id}}">
+                                    <div id="custom_info_btns">
+                                        <button type="reset" class="btn-default img-rounded"
+                                                onclick="show_comment_form.hidden = false; comment_form.hidden = true">
+                                            Cancel
+                                        </button>
+                                        <input type="submit" class="alert-success img-rounded"
+                                               onclick="show_comment_form.hidden = false; comment_form.hidden = true"
+                                               value="Comment"/>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    {{/if}}
+                    <div align="center">
+                        <br>
+                        {{#each article.articleComments}}
+                            <br>
+                            <div align="left" class="useDescription">
+                                <a href="/user/details/{{author.id}}" class="avatar-box">
+                                    <img class="avatar-sm img-rounded" src="{{this.author.avatar}}"
+                                         onerror="this.src='/images/avatar_default.jpg'">
+                                </a>
+
+                                {{author.fullName}}:
+                                <br>
+                                <span id="comment" style="text-align: justify;">{{content}}</span>
+                                {{#if editable}}
+                                    <img src="/images/settings_icon.png"
+                                         onclick="document.getElementById('{{this.id}}').hidden = document.getElementById('{{id}}').hidden == false;">
+                                    <form hidden id="{{this.id}}" method="post">
+                                        <input name="comment_id" type="hidden" value="{{this.id}}">
+                                        <input name="article_id" type="hidden" value="{{this.article}}">
+                                        <button class="btn btn-danger btn-xs" type="submit">Delete</button>
+                                    </form>
+                                {{/if}}
+                                <small class="Description">{{datetime}}</small>
+
+                            </div>
+                        {{/each}}
                     </div>
                 </footer>
             </article>

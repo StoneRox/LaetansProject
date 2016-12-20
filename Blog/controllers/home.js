@@ -23,6 +23,15 @@ module.exports = {
                      console.log(err.message);
                  }
                  Category.find({}).then(categories => {
+                     for(let article of category.articles)
+                     {
+                         let contentCut = 300;
+                         if(article.content.length < 300){
+                             contentCut = article.content.length;
+                         }
+                         article.content = article.content.substr(0, contentCut) + '...';
+                     }
+
                      res.render('home/article', {articles: category.articles, category: category, categories: categories});
                  })
              })
