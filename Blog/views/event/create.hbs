@@ -51,14 +51,14 @@
                 <div class="form-group">
                     <label class="col-sm-4 control-label">Start Date</label>
                     <div class="col-sm-4 ">
-                        <input type="text" class="form-control" id="dateStart" placeholder="MM/DD/YYYY" name="eventStart">
+                        <input type="text" class="form-control" id="min-date" placeholder="MM/DD/YYYY" name="eventStart">
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label class="col-sm-4 control-label">End Date</label>
                     <div class="col-sm-4 ">
-                        <input type="text" class="form-control" id="dateEnd" placeholder="MM/DD/YYYY" name="eventEnd">
+                        <input type="text" class="form-control" id="min-date2" placeholder="MM/DD/YYYY" name="eventEnd">
                     </div>
                 </div>
 
@@ -87,3 +87,35 @@
         </form>
     </div>
 </div>
+
+<link rel="stylesheet" href="https://rawgit.com/FezVrasta/bootstrap-material-design/master/dist/css/material.min.css" />
+<link rel="stylesheet" href="/stylesheets/bootstrap-material-datetimepicker.css" />
+<link href='http://fonts.googleapis.com/css?family=Roboto:400,500' rel='stylesheet' type='text/css'>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+<script src="https://code.jquery.com/jquery-1.12.3.min.js" integrity="sha256-aaODHAgvwQW1bFOGXMeX+pC4PZIPsvn2h1sArYOhgXQ=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="https://rawgit.com/FezVrasta/bootstrap-material-design/master/dist/js/material.min.js"></script>
+<script type="text/javascript" src="http://momentjs.com/downloads/moment-with-locales.min.js"></script>
+<script type="text/javascript" src="/javascripts/bootstrap-material-datetimepicker.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function()
+    {
+
+        $('#date-format').bootstrapMaterialDatePicker
+        ({
+            format: 'dddd DD MMMM YYYY - HH:mm'
+        });
+        $('#date-format2').bootstrapMaterialDatePicker
+        ({
+            format: 'dddd DD MMMM YYYY - HH:mm'
+        });
+
+        $('#min-date').bootstrapMaterialDatePicker({ format : 'YYYY-MM-DD HH:mm:ss:SSS:Z', minDate : new Date() });
+        $('#min-date2').bootstrapMaterialDatePicker({ format : 'YYYY-MM-DD HH:mm:ss.SSS:Z', minDate : new Date() });
+
+
+        $.material.init()
+    });
+</script>
