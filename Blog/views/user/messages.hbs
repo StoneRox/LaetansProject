@@ -1,0 +1,28 @@
+<div class="container body-content" align="center">
+    <h4>Messages between you and <a href="/user/details/{{contact.id}}">{{contact.fullName}}</a></h4>
+    <div>
+        <form action="/user/{{contact.id}}/messages" method="post">
+            <textarea name="message" id="message" cols="30" rows="10" class="messageBox" required></textarea>
+            <input name="user_id" type="hidden" value="{{contact.id}}">
+            <br>
+            <button type="submit" style="border-radius: 4px">Send</button>
+        </form>
+    </div>
+    <br>
+        {{#each messages}}
+        <div align="center" style="text-align: justify; text-align-last: left; width: 60%">
+            <h4>
+                {{author.fullName}}:
+            </h4>
+            <p>
+            {{content}}
+            <br>
+            <small>
+                {{datetime}}
+            </small>
+            </p>
+            <br>
+        </div>
+
+        {{/each}}
+</div>

@@ -14,7 +14,13 @@ let userSchema = mongoose.Schema(
         userInformation: {type: String, required: false},
         contacts: [{type: String, required: false}],
         //events: [{type: mongoose.Schema.ObjectId, ref: 'Event'}],
-        events: {type: [mongoose.Schema.ObjectId], default: []},        userComments:  [{type: mongoose.Schema.ObjectId, ref: 'Comment'}],    }
+        events: {type: [mongoose.Schema.ObjectId], default: []},
+        userComments:  [{type: mongoose.Schema.ObjectId, ref: 'Comment'}],
+
+
+        messages: [{type: mongoose.Schema.ObjectId, ref: 'Message'}],
+        unreadMessagesFrom: [{type: mongoose.Schema.ObjectId, ref: 'User'}],
+    }
 );
 
 userSchema.method({
@@ -72,9 +78,15 @@ userSchema.method({
                 article.remove();
             })
         }
+        let Message = mongoose.model('Message');
         for(let contact of this.contacts){
             User.findById(contact).then(c => {
                 c.contacts.splice(c.contacts.indexOf(this.id),1);
+                for(let message of this.messages){
+                    Message.findOneAndRemove({_id: message}).then(m => {
+                        c.messages.splice(c.messages.indexOf(m.id));
+                    })
+                }
                 c.save();
             })
         }

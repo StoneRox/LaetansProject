@@ -22,6 +22,7 @@ module.exports = (config) => {
     require('./../models/Tag');
     require('./../models/Event');
     require('./../models/Comment');
+    require('./../models/Message');
 
 };
 

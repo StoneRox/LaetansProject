@@ -21,6 +21,7 @@
                 <input class="img-rounded alert-danger" type="submit" value="Yes">
                 <button type="reset" class="img-rounded alert-info" onclick="remove_contact.hidden=true">No</button>
             </form>
+            <a href="/user/{{id}}/messages" class="btn btn-success btn-xs">Show messages</a>
         {{/if}}
         <p>
             Email: {{user_inspect.email}}

@@ -1,6 +1,7 @@
 const User = require('mongoose').model('User');
 const Role = require('mongoose').model('Role');
 const Article = require('mongoose').model('Article');
+const Message = require('mongoose').model('Message');
 const encryption = require('./../utilities/encryption');
 
 module.exports = {
@@ -184,7 +185,21 @@ module.exports = {
             user.contacts.splice(index, 1);
             user.save();
             User.findById(body.remove_contact_id).then(contact => {
-                contact.contacts.splice(contact.contacts.indexOf(user.id),1);
+                contact.contacts.splice(contact.contacts.indexOf(user.id), 1);
+                for (let message of user.messages) {
+                    Message.findById(message).then( mess => {
+                        if(mess.userSides.indexOf(contact.id) != -1){
+                            Message.findOneAndRemove({_id: message}).then(m => {
+                                if (m) {
+                                    contact.messages.splice(contact.messages.indexOf(m.id));
+                                    user.messages.splice(user.messages.indexOf(m.id));
+                                    contact.save();
+                                    user.save();
+                                }
+                            })
+                        }
+                    });
+                }
                 contact.save();
             });
             res.redirect(`/user/details/${body.remove_contact_id}`);
@@ -212,13 +227,13 @@ module.exports = {
         let id = req.params.id;
         User.findById(id).populate('userComments').then(user => {
             let comments = user.userComments;
-            for(let comment of comments){
+            for (let comment of comments) {
                 comment.dateTime = comment.date.toLocaleDateString() + ' ' + comment.date.toLocaleTimeString();
                 Article.findById(comment.article).then(article => {
                     comment.article.title = article.title;
                 });
                 user.isInRole('Admin').then(isAdmin => {
-                    if(isAdmin || req.user.id == user.id){
+                    if (isAdmin || req.user.id == user.id) {
                         comment.editable = true;
                     }
                 });
@@ -226,4 +241,51 @@ module.exports = {
             res.render(`user/comments`, {comments: comments, author: user});
         });
 
-    }};
+    },
+
+    userMessagesGet: (req, res) => {
+        let id = req.params.id;
+        req.user.unreadMessagesFrom.splice(req.user.unreadMessagesFrom.indexOf(id), 1);
+        req.user.save();
+        Message.find([{author: id} || {author: req.user.id}]).populate('author').then(userMessages => {
+            let messages = [];
+            for (let mes of userMessages) {
+                if (mes.userSides.indexOf(id) != -1 && mes.userSides.indexOf(req.user.id) != -1) {
+                    messages.push(mes);
+                }
+            }
+            messages.reverse();
+            for (let m of messages) {
+                m.datetime = m.date.toLocaleDateString() + ' ' + m.date.toLocaleTimeString();
+            }
+            User.findById(id).then(user => {
+                res.render('user/messages', {messages: messages, contact: user});
+            });
+
+
+        })
+    },
+
+    userMessagesPost: (req, res) => {
+        let body = req.body;
+        let message = {
+            content: body.message,
+            author: req.user.id,
+            userSides: [req.user.id, body.user_id]
+        };
+
+        Message.create(message).then(m => {
+            req.user.messages.push(m.id);
+            req.user.save();
+            User.findById(body.user_id).then(user => {
+                user.messages.push(m.id);
+                if (user.unreadMessagesFrom.indexOf(req.user.id) == -1) {
+                    user.unreadMessagesFrom.push(req.user.id);
+                }
+                user.save();
+                res.redirect('back');
+            })
+        })
+    }
+
+};

@@ -6,8 +6,16 @@ const Tag = require('mongoose').model('Tag');
 module.exports = {
  index: (req, res) => {
      Category.find({}).then(categories => {
-         res.render('home/index', {categories: categories})
+         let user = req.user;
+         if(user){
+             User.findById(user.id).populate('unreadMessagesFrom').then(u =>{
 
+                 res.render('home/index', {categories: categories, user: u})
+             });
+         }
+         else {
+             res.render('home/index', {categories: categories, user: user})
+         }
      })
  },
     listCategoryArticles: (req,res) => {

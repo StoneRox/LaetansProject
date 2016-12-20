@@ -7100,4 +7100,12 @@ textarea.comment{
 
   border-radius: 3px;
 }
-
+.messageBox{
+  width: 60%;
+  max-width: 60%;
+  height: 50px;
+  border-radius: 4px;
+}
+.attention:hover{
+  background: aqua;
+}

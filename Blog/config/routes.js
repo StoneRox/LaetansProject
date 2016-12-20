@@ -45,13 +45,20 @@ module.exports = (app) => {
     app.post('/user/details/:id', userController.contactsPost);
     app.get('/user/:id/articles', userController.articlesByUser);
     app.get('/user/delete/', userController.deleteProfileGet);
-    app.post('/user/delete/', userController.deleteProfilePost);    app.get('/user/:id/comments', userController.userCommentsGet);
+    app.post('/user/delete/', userController.deleteProfilePost);
+    app.get('/user/:id/comments', userController.userCommentsGet);
     app.post('/user/:id/comments', articleController.commentPost);
     app.get('/event/create', eventController.createGet);
     app.post('/event/create', eventController.createPost);
     app.get('/event/list', eventController.listAll);
     app.get('/event/details/:id', eventController.details);
 
+
+
+
+
+    app.get('/user/:id/messages', userController.userMessagesGet);
+    app.post('/user/:id/messages', userController.userMessagesPost);
 
     app.use((req,res, next) => {
             req.user.isInRole('Admin').then(isAdmin => {
