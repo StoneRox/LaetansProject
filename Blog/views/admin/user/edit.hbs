@@ -37,6 +37,31 @@
                     </div>
                 </div>
                 <div class="form-group">
+                    <label class="col-sm-4 control-label" for="confirmedPassword">Avatar</label>
+                    <div class="col-sm-4">
+                        <img src="{{user.avatar}}" class="avatar-lg img-rounded"
+                             onerror="this.src='/images/avatar_default.jpg'">
+                        <input class="img-rounded" id="avatar_url" name="avatar_url" type="text" value="{{user_edit.avatar}}">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-4 control-label" for="confirmedPassword">{{user_edit.fullName}}'s custom info:</label>
+                    <div class="col-sm-4">
+            <textarea maxlength="999" class="lg img-rounded" name="user_info" id="user_info" cols="12" rows="10"
+                      >{{user_edit.userInformation}}</textarea>
+                            <br>
+                            <div id="textarea_feedback"></div>
+                        <script>
+                            $(document).ready(function () {
+                                $('#user_info').keyup(function () {
+                                    var text_length = 999 - $('#user_info').val().length;
+                                    $('#textarea_feedback').html(text_length + ' characters remaining');
+                                });
+                            });
+                        </script>
+                    </div>
+                </div>
+                <div class="form-group">
                     {{#each roles}}
                         <div class="col-sm-4 col-sm-offset-4">
                             <input type="checkbox" name="roles"

@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
 
 
-
 let articleSchema = mongoose.Schema(
     {
         title: {type: String, required: true},
@@ -10,6 +9,7 @@ let articleSchema = mongoose.Schema(
         category: {type: mongoose.Schema.Types.ObjectId, required: true, ref: 'Category'},
         tags: [{type: mongoose.Schema.Types.ObjectId, required: true, ref: 'Tag'}],
         picture: {type: String, required: false},
+        articleComments: [{type: mongoose.Schema.ObjectId, ref: 'Comment'}],
         date: {type: Date, default: Date.now}
     }
 );
@@ -65,6 +65,17 @@ articleSchema.method({
                     tag.save();
                 }
             });
+        }
+
+        let Comment = mongoose.model('Comment');
+        for(let comment of this.articleComments)
+        {
+            Comment.findOneAndRemove({_id: comment}).then(c => {
+                User.findById(c.author).then(user => {
+                    user.userComments.remove(comment);
+                    user.save();
+                })
+            })
         }
     },
 

@@ -16,9 +16,8 @@ let userSchema = mongoose.Schema(
         //events: [{type: mongoose.Schema.ObjectId, ref: 'Event'}],
         events: {type: [mongoose.Schema.ObjectId], default: []},
         eventsJoined: {type: [mongoose.Schema.ObjectId], default: []},
-
-    }
-);
+        userComments: [{type: mongoose.Schema.ObjectId, ref: 'Comment'}],
+    });
 
 userSchema.method({
     authenticate: function (password) {
@@ -73,6 +72,21 @@ userSchema.method({
             Article.findById(article).then(article => {
                 article.prepareDelete();
                 article.remove();
+            })
+        }
+        for(let contact of this.contacts){
+            User.findById(contact).then(c => {
+                c.contacts.splice(c.contacts.indexOf(this.id),1);
+                c.save();
+            })
+        }
+        let Comment = mongoose.model('Comment');
+        for(let comment of this.userComments){
+            Comment.findById(comment).then( c => {
+                Article.findById(c.article).then(a => {
+                    a.articleComments.splice(a.articleComments.indexOf(comment),1);
+                    c.remove();
+                })
             })
         }
     },

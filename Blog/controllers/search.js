@@ -23,6 +23,14 @@ module.exports = {
                         resultUsers.push(user);
                     }
                 }
+                for(let article of resultArticles)
+                {
+                    let contentCut = 300;
+                    if(article.content.length < 300){
+                        contentCut = article.content.length;
+                    }
+                    article.content = article.content.substr(0, contentCut) + '...';
+                }
                 res.render('searchResult/result', {result: {resultArticles, resultUsers}, search_word: searchWord.search_word})
             });
         });

@@ -1,15 +1,16 @@
 <div class="container body-content">
     <div class="row">
         <p>
-                <a class="avatar-box img-rounded" onclick="function showHide() {
+            <a class="avatar-box img-rounded" onclick="function showHide() {
                     avatar_change.hidden=!avatar_change.hidden;
                 } showHide() ">
-                    <img src="{{user.avatar}}" class="avatar-lg img-rounded" onerror="this.src='/images/avatar_default.jpg'">
-                </a>
+                <img src="{{user.avatar}}" class="avatar-lg img-rounded"
+                     onerror="this.src='/images/avatar_default.jpg'">
+            </a>
         <form hidden name="avatar_change" id="avatar_change" action="/user/details" method="post">
             <label for="avatar_url">Avatar URL:</label>
             <input class="img-rounded" id="avatar_url" name="avatar_url" type="text" value="{{avatar}}">
-        <input type="submit" class="alert-success img-rounded" onclick="avatar_change.hidden=true;" value="Save"/>
+            <input type="submit" class="alert-success img-rounded" onclick="avatar_change.hidden=true;" value="Save"/>
         </form>
         <p>
             Email: {{email}}
@@ -21,26 +22,36 @@
             Number of articles: <a href="/user/{{user.id}}/articles">{{user.articles.length}}</a>
         </p>
         <p>
+            Number of comments: <a href="/user/{{user.id}}/comments">{{user.userComments.length}}</a>
+        </p>
+        <p>
             {{fullName}}'s custom info:
-
+        </p>
         <form action="/user/details" method="post" name="user_info_field">
-        <textarea maxlength="999" class="lg img-rounded"  name="user_info" id="user_info" cols="12" rows="10" disabled>{{userInformation}}</textarea>
-        <br>
-        <div id="textarea_feedback"></div>
-        <div id="custom_info_btns" hidden>
-            <input type="submit" onsubmit="user_info.disabled=true; change_user_info.hidden=false" class="alert-success img-rounded"  value="Save"/>
-            <button type="reset" class="btn-default img-rounded" onclick="custom_info_btns.hidden=true; change_user_info.hidden=false; user_info.disabled=true">Cancel</button>
-        </div>
+            <textarea maxlength="999" class="lg img-rounded" name="user_info" id="user_info" cols="12" rows="10"
+                      disabled>{{userInformation}}</textarea>
+            <br>
+            <div id="textarea_feedback"></div>
+            <div id="custom_info_btns" hidden>
+                <input type="submit" onsubmit="user_info.disabled=true; change_user_info.hidden=false"
+                       class="alert-success img-rounded" value="Save"/>
+                <button type="reset" class="btn-default img-rounded"
+                        onclick="custom_info_btns.hidden=true; change_user_info.hidden=false; user_info.disabled=true">
+                    Cancel
+                </button>
+            </div>
         </form>
         <script>
-            $(document).ready(function() {
-                $('#user_info').keyup(function() {
+            $(document).ready(function () {
+                $('#user_info').keyup(function () {
                     let text_length = 999 - $('#user_info').val().length;
                     $('#textarea_feedback').html(text_length + ' characters remaining');
                 });
             });
         </script>
-        <button id="change_user_info" class="alert-info img-rounded" onclick="user_info.disabled=false; custom_info_btns.hidden=false; this.hidden=true">Change info</button>
+        <button id="change_user_info" class="alert-info img-rounded"
+                onclick="user_info.disabled=false; custom_info_btns.hidden=false; this.hidden=true">Change info
+        </button>
         <a href="/user/delete"> <button id="deleteProfileButton" class="alert-danger img-rounded">Delete Profile</button></a>
     </div>
 </div>

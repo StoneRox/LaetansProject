@@ -56,6 +56,8 @@ module.exports = {
                     User.findOne({_id: id}).then(user => {
                         user.email = userArgs.email;
                         user.fullName = userArgs.fullName;
+                        user.avatar = userArgs.avatar_url;
+                        user.userInformation = userArgs.user_info;
 
                         let passwordHash = user.passwordHash;
                         if(userArgs.password){

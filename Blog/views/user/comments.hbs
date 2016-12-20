@@ -1,0 +1,39 @@
+<div class="container body-content">
+<div align="center" >
+    <div class="col-md-12">
+        <h2>Comments by:</h2>
+        <div>
+            <a href="/user/details/{{author.id}}" class="avatar-box">
+                <img class="avatar-sm img-rounded" src="{{author.avatar}}"
+                     onerror="src='/images/avatar_default.jpg'">
+            </a>
+            {{author.fullName}}
+        </div>
+        <div align="left">
+            {{#each comments}}
+                <span class="useDescription "  style="text-align: justify;">
+        Article:
+        <a href="/article/details/{{article}}">{{article.title}}</a>
+
+        <br>
+            <span id="comment">{{content}}</span>
+                    {{#if editable}}
+                        <img src="/images/settings_icon.png"
+                             onclick="document.getElementById('{{id}}').hidden = document.getElementById('{{id}}').hidden == false;">
+                <form hidden id="{{id}}" method="post">
+                    <input name="comment_id" type="hidden" value="{{id}}">
+                    <input name="article_id" type="hidden" value="{{article}}">
+                    <button class="btn btn-danger btn-xs" type="submit">Delete</button>
+                </form>
+                    {{/if}}
+                    <small class="Description"> {{dateTime}}</small>
+                <br>
+
+        </span>
+            {{/each}}
+        </div>
+    </div>
+
+
+</div>
+</div>

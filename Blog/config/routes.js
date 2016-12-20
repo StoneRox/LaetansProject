@@ -22,11 +22,13 @@ module.exports = (app) => {
     app.get('/article/create', articleController.createGet);
     app.post('/article/create', articleController.createPost);
     app.get('/article/details/:id', articleController.details);
+    app.post('/article/details/:id', articleController.commentPost);
     app.get('/article/edit/:id',articleController.editGet);
     app.post('/article/edit/:id',articleController.editPost);
     app.get('/article/delete/:id', articleController.deleteGet);
     app.post('/article/delete/:id', articleController.deletePost);
     app.get('/tag/:name', tagController.listArticleByTag);
+
 
     app.use((req,res, next) => {
         if (req.isAuthenticated()){
@@ -43,8 +45,8 @@ module.exports = (app) => {
     app.post('/user/details/:id', userController.contactsPost);
     app.get('/user/:id/articles', userController.articlesByUser);
     app.get('/user/delete/', userController.deleteProfileGet);
-    app.post('/user/delete/', userController.deleteProfilePost);
-
+    app.post('/user/delete/', userController.deleteProfilePost);    app.get('/user/:id/comments', userController.userCommentsGet);
+    app.post('/user/:id/comments', articleController.commentPost);
     app.get('/event/create', eventController.createGet);
     app.post('/event/create', eventController.createPost);
     app.get('/event/list', eventController.listAll);
