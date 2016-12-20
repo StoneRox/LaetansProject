@@ -137,4 +137,32 @@ module.exports = {
             res.redirect('/event/list');
         })
     },
+
+    deleteEventGet: (req, res) => {
+        let id = req.params.id;
+
+        Event.findById(id).then(event => {
+            res.render('event/deleteEvent', {event: event});
+        })
+    },
+    deleteEventPost: (req, res) => {
+        let id = req.params.id;
+        Event.findById(id).then(event => {
+
+            User.find({eventsJoined: event.id}).then(users => {
+                //finds all users who have joined the event, removes the event
+                users.forEach(function(user){
+                    user.eventsJoined.remove(event.id);
+                    user.save();
+                    event.attendees.remove(user.id);
+                    event.save();
+                })
+            });
+
+            event.remove();
+            event.save();
+
+            res.redirect('/event/list');
+        })
+    }
 };

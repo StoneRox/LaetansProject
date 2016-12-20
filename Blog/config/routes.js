@@ -55,6 +55,8 @@ module.exports = (app) => {
     app.post('/event/details/joinEvent/:id', eventController.joinEventPost);
     app.get('/event/details/leaveEvent/:id', eventController.leaveEventGet);
     app.post('/event/details/leaveEvent/:id', eventController.leaveEventPost);
+    app.get('/event/details/deleteEvent/:id', eventController.deleteEventGet);
+    app.post('/event/details/deleteEvent/:id', eventController.deleteEventPost);
 
 
 
