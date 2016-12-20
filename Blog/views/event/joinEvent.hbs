@@ -1,0 +1,15 @@
+<div class="container body-content span=8 offset=2">
+    <div class="well">
+        <form class="form-horizontal" method="post" action="/event/details/joinEvent/{{event.id}}">
+            <fieldset>
+                <legend>Please confirm joining this event</legend>
+                <div class="form-group ">
+                    <div class="col-sm-4 pull-left">
+                        <a class="btn btn-info" href="/event/details/{{event.id}}">I've changed my mind</a>
+                        <button id="delete_button" type="submit" class="btn btn-success">Proceed</button>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</div>

@@ -26,10 +26,10 @@
 
                 <div>
                 {{#if hasJoined}}
-                    <button class="dtp-buttons">Leave event</button>
+                    <a href="leaveEvent/{{event.id}}"><button class="dtp-buttons" >Leave event</button></a>
                 {{/if}}
                 {{#unless hasJoined}}
-                    <button class="dtp-buttons">Join event</button>
+                    <a href="joinEvent/{{event.id}}"><button class="dtp-buttons">Join event</button></a>
                 {{/unless}}
                 </div>
 
@@ -53,9 +53,9 @@
                     <div class="pull-right">
                         {{#if isUserAuthorized}}
                             <a class="btn btn-success btn-xs"
-                               href="/event/edit/{{article.id}}">Edit &raquo;</a>
+                               href="/event/edit/{{event.id}}">Edit &raquo;</a>
                             <a class="btn btn-danger btn-xs"
-                               href="/event/delete/{{article.id}}">Delete &raquo;</a>
+                               href="/event/delete/{{event.id}}">Delete &raquo;</a>
                         {{/if}}
                         <a class="btn btn-default btn-xs" href="/event/list">Back &raquo;</a>
                     </div>

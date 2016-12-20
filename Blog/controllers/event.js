@@ -92,4 +92,49 @@ module.exports = {
             })
         })
     },
+
+    joinEventGet: (req, res) =>{
+        let id = req.params.id;
+
+        Event.findById(id).then(event => {
+            res.render('event/joinEvent', {event: event});
+        })
+    },
+
+    joinEventPost: (req, res) => {
+        let id = req.params.id;
+        Event.findById(id).then(event => {
+            event.attendees.push(req.user.id);
+            event.save();
+            User.findById(req.user.id).then(user => {
+               user.eventsJoined.push(event.id);
+               user.save();
+            });
+
+            res.redirect('/event/list');
+        })
+
+    },
+
+    leaveEventGet: (req, res) => {
+        let id = req.params.id;
+
+        Event.findById(id).then(event => {
+            res.render('event/leaveEvent', {event: event});
+        })
+    },
+
+    leaveEventPost: (req, res) => {
+        let id = req.params.id;
+        Event.findById(id).then(event => {
+            event.attendees.remove(req.user.id);
+            event.save();
+            User.findById(req.user.id).then(user => {
+                user.eventsJoined.remove(event.id);
+                user.save();
+            });
+
+            res.redirect('/event/list');
+        })
+    },
 };
