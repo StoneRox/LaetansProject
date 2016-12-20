@@ -25,16 +25,21 @@
                 </p>
 
                 <div>
-                {{#if hasCancelled}}
-                    {{#unless hasExpired}}
-                        {{#if hasJoined}}
-                            <a href="leaveEvent/{{event.id}}"><button class="dtp-buttons" >Leave event</button></a>
-                        {{/if}}
-                        {{#unless hasJoined}}
-                            <a href="joinEvent/{{event.id}}"><button class="dtp-buttons">Join event</button></a>
+                    {{#unless isFull}}
+                        {{#unless hasCancelled}}
+                            {{#unless hasExpired}}
+                                {{#if hasJoined}}
+                                    <a href="leaveEvent/{{event.id}}"><button class="dtp-buttons" >Leave event</button></a>
+                                {{/if}}
+                                {{#unless hasJoined}}
+                                    <a href="joinEvent/{{event.id}}"><button class="dtp-buttons">Join event</button></a>
+                                {{/unless}}
+                            {{/unless}}
                         {{/unless}}
                     {{/unless}}
-                {{/if}}
+                    {{#if isFull}}
+                        <p class="text-warning">Event is full. Please try later.(lol)</p>
+                    {{/if}}
                 </div>
 
                 <small class="...">

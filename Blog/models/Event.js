@@ -20,7 +20,8 @@ eventSchema.method({
             console.log("isExpired got wrong data");
             return false;
         }
-        let isExpired = ((event.eventEnd < Date.now()) && (event.status != "Cancelled"));
+        //let isExpired = ((event.eventEnd < Date.now()) && (event.status != "Cancelled"));
+        let isExpired = ((event.eventEnd < Date.now()));
         return isExpired;
     },
 
@@ -29,8 +30,17 @@ eventSchema.method({
             console.log("isExpired got wrong data");
             return false;
         }
-        let isCancelled = ((event.eventEnd < Date.now()) && (event.status != "Cancelled"));
+        let isCancelled = (event.status == "Cancelled");
         return isCancelled;
+    },
+
+    isFull: function (event) {
+        if (!event){
+            console.log("isExpired got wrong data");
+            return false;
+        }
+        let isFull = (event.attendanceLimit == event.attendees.length);
+        return isFull;
     },
 
     prepareDelete: function () {
