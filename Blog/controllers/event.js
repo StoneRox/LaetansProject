@@ -35,6 +35,61 @@ module.exports = {
         })
     },
 
+    editGet: (req, res) => {
+        let id = req.params.id;
+
+        Event.findById(id).then(event => {
+            res.render('event/editEvent', {event: event});
+        })
+    },
+
+    editPost: (req, res) => {
+        let id = req.params.id;
+
+        let eventArgs = req.body;
+
+        let errorMsg = '';
+        if (!eventArgs.title) {
+            errorMsg = 'Article title cannot be empty!';
+        }
+        else if (!eventArgs.description) {
+            errorMsg = 'Article content cannot be empty!';
+        }
+        if (errorMsg) {
+            res.render('event/details/editEvent', {error: errorMsg})
+        }
+
+        else {
+
+            if (!req.isAuthenticated()) {
+                let returnUrl = `/event/editEvent/${id}`;
+                req.session.returnUrl = returnUrl;
+
+                res.redirect('/user/login');
+                return;
+            }
+
+            Event.findById(id).then(event => {
+
+                event.title = eventArgs.title;
+                event.location = eventArgs.location;
+                event.attendanceLimit = eventArgs.attendanceLimit;
+                event.eventStart = eventArgs.eventStart;
+                event.eventEnd = eventArgs.eventEnd;
+                event.description = eventArgs.description;
+                event.picture = eventArgs.picture;
+
+                event.save((err) => {
+                    if (err) {
+                        console.log(err.message);
+                    }
+                });
+                res.redirect(`/event/details/${id}`);
+            });
+
+        }
+    },
+
     listAll: (req, res) => {
         Event.find({}).then(events => {
             let upcomingEvents = [];

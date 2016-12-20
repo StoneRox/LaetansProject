@@ -1,0 +1,121 @@
+<link type="text/css" rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<div class="container body-content span=8 offset=2">
+    <div class="well">
+        <form class="form-horizontal" method="POST" action="/event/details/editEvent/{{event.id}}">
+            <fieldset>
+                <legend>Modifying existing event</legend>
+                <div class="form-group">
+                    <label class="col-sm-4 control-label" for="eventTitle">Event Title</label>
+                    <div class="col-sm-4 ">
+                        <input type="text" class="form-control" id="eventTitle"
+                               value="{{event.title}}" name="title" required >
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-4 control-label"
+                           for="eventDescription">Event Description</label>
+                    <div class="col-sm-6">
+ <textarea class="form-control" id="eventDescription" rows="5"
+           name="description" required>{{event.description}}</textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-4 control-label" for="eventLocation">Location</label>
+                    <div class="col-sm-4 ">
+                        <input type="text" class="form-control" id="eventLocation"
+                               value="{{event.location}}"
+                               name="location">
+                    </div>
+                </div>
+                <!--
+                                <div class="form-group">
+                                    <label class="col-sm-4 control-label" for="eventTime">Starts at</label>
+                                    <div class="col-sm-4 ">
+                                        <input type="text" class="form-control" id="eventTime"
+                                               placeholder="20:00"
+                                               name="time">
+                                    </div>
+                                </div>
+
+                <script>
+                    $( function() {
+                        $( "#dateStart" ).datepicker();
+                    } );
+                    $( function() {
+                        $( "#dateEnd" ).datepicker();
+                    } );
+                </script>
+                -->
+                <div class="form-group">
+                    <label class="col-sm-4 control-label">Start Date</label>
+                    <div class="col-sm-4 ">
+                        <input type="text" class="form-control" id="min-date" value="{{event.eventStart}}" name="eventStart">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-4 control-label">End Date</label>
+                    <div class="col-sm-4 ">
+                        <input type="text" class="form-control" id="min-date2" value="{{event.eventEnd}}" name="eventEnd">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-4 control-label">Picture URL</label>
+                    <div class="col-sm-4 ">
+                        <input type="text" class="form-control" id="pictureUrl" value="{{event.picture}}" name="picture">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-4 control-label" for="attendanceLimit">Guests limit</label>
+                    <div class="col-sm-4 ">
+                        <input type="text" class="form-control" id="attendanceLimit"
+                               value="{{event.attendanceLimit}}" name="attendanceLimit">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-sm-4 col-sm-offset-4">
+                        <a class="btn btn-default" href="/event/list">Cancel</a>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</div>
+
+<link rel="stylesheet" href="https://rawgit.com/FezVrasta/bootstrap-material-design/master/dist/css/material.min.css" />
+<link rel="stylesheet" href="/stylesheets/bootstrap-material-datetimepicker.css" />
+<link href='http://fonts.googleapis.com/css?family=Roboto:400,500' rel='stylesheet' type='text/css'>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+<script src="https://code.jquery.com/jquery-1.12.3.min.js" integrity="sha256-aaODHAgvwQW1bFOGXMeX+pC4PZIPsvn2h1sArYOhgXQ=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="https://rawgit.com/FezVrasta/bootstrap-material-design/master/dist/js/material.min.js"></script>
+<script type="text/javascript" src="http://momentjs.com/downloads/moment-with-locales.min.js"></script>
+<script type="text/javascript" src="/javascripts/bootstrap-material-datetimepicker.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function()
+    {
+
+        $('#date-format').bootstrapMaterialDatePicker
+        ({
+            format: 'dddd DD MMMM YYYY - HH:mm'
+        });
+        $('#date-format2').bootstrapMaterialDatePicker
+        ({
+            format: 'dddd DD MMMM YYYY - HH:mm'
+        });
+
+        $('#min-date').bootstrapMaterialDatePicker({ format : 'YYYY-MM-DD HH:mm:ss:SSS:Z', minDate : new Date() });
+        $('#min-date2').bootstrapMaterialDatePicker({ format : 'YYYY-MM-DD HH:mm:ss.SSS:Z', minDate : new Date() });
+
+
+        $.material.init()
+    });
+</script>
