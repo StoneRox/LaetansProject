@@ -14,9 +14,10 @@ let userSchema = mongoose.Schema(
         userInformation: {type: String, required: false},
         contacts: [{type: String, required: false}],
         //events: [{type: mongoose.Schema.ObjectId, ref: 'Event'}],
+        
         events: {type: [mongoose.Schema.ObjectId], default: []},
-        userComments:  [{type: mongoose.Schema.ObjectId, ref: 'Comment'}],
-
+        eventsJoined: {type: [mongoose.Schema.ObjectId], default: []},
+        userComments: [{type: mongoose.Schema.ObjectId, ref: 'Comment'}],
 
         messages: [{type: mongoose.Schema.ObjectId, ref: 'Message'}],
         unreadMessagesFrom: [{type: mongoose.Schema.ObjectId, ref: 'User'}],
