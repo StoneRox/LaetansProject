@@ -159,6 +159,11 @@ module.exports = {
                 })
             });
 
+            User.findOne({events: event.id}).then(author => {
+                author.events.remove(event.id);
+                author.save();
+            });
+
             event.remove();
             event.save();
 
