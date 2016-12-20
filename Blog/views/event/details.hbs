@@ -24,6 +24,15 @@
                     Confirmed guests: {{event.attendees.length}}
                 </p>
 
+                <div>
+                {{#if hasJoined}}
+                    <button class="dtp-buttons">Leave event</button>
+                {{/if}}
+                {{#unless hasJoined}}
+                    <button class="dtp-buttons">Join event</button>
+                {{/unless}}
+                </div>
+                
                 <small class="...">
                     Event created by: {{event.author.fullName}}
                     <p>

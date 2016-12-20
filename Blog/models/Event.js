@@ -5,12 +5,13 @@ let eventSchema = mongoose.Schema({
     description: {type: String, required: true},
     location: {type: String, required: true},
     attendanceLimit: {type: Number, min: 0, required: false},
-    attendees: [{type:mongoose.Schema.Types.ObjectId, ref:'User'}],
+    //attendees: [{type:mongoose.Schema.Types.ObjectId, ref:'User'}],
+    attendees: [{type: mongoose.Schema.ObjectId, ref: 'User'}],
     author: {type: mongoose.Schema.ObjectId, required: true, ref: 'User'},
     picture: {type: String, required: false},
     eventStart: {type: Date, default: Date.now},
     eventEnd: {type: Date, default: Date.now},
-    status: {type: String, default: "Upcoming"}, //statuses: upcoming, live_now, over, cancelled
+    status: {type: String, default: "Upcoming"}, //statuses: upcoming, live, over, cancelled
 });
 
 eventSchema.method({

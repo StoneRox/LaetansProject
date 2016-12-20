@@ -1,4 +1,5 @@
 const Event = require('mongoose').model('Event');
+const User = require('mongoose').model('User');
 
 module.exports = {
     createGet: (req, res) => {
@@ -62,7 +63,17 @@ module.exports = {
         //compromise - Localhosting doesn't have cronjobs, and I can't find how to schedule a check to see if event expired to update the status in the DB.
         // that's why we are making the check and update when opening up the details on the event.
 
-        Event.findById(id).populate('author').then(event => {
+        //This checks if the user has joined this event. Join button if "-1", else a Not_Going button.
+        Event.findById(id).then(event => {
+            let hasJoined = req.user.eventsJoined.indexOf(event.id);
+            if (hasJoined !== -1) {
+                hasJoined = true;
+            }
+            else {
+                hasJoined = false
+            }
+
+
 
             //update status
             if (event.isExpired(event)){
@@ -71,13 +82,13 @@ module.exports = {
             }
 
             if (!req.user.isEventAuthor(event)){
-                res.render('event/details', {event: event, isUserAuthorized: false});
+                res.render('event/details', {event: event, isUserAuthorized: false, hasJoined: hasJoined});
                 return;
             }
 
             req.user.isInRole('Admin').then(isAdmin => {
                 let isUserAuthorized = isAdmin || req.user.isEventAuthor(event);
-                res.render('event/details', {event: event, isUserAuthorized: isUserAuthorized});
+                res.render('event/details', {event: event, isUserAuthorized: isUserAuthorized, hasJoined: hasJoined});
             })
         })
     },

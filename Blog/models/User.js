@@ -15,6 +15,8 @@ let userSchema = mongoose.Schema(
         contacts: [{type: String, required: false}],
         //events: [{type: mongoose.Schema.ObjectId, ref: 'Event'}],
         events: {type: [mongoose.Schema.ObjectId], default: []},
+        eventsJoined: {type: [mongoose.Schema.ObjectId], default: []},
+
     }
 );
 
