@@ -95,7 +95,8 @@ module.exports = {
         }
         res.render('user/details', req.user);
     },
-    changeUserInfo: (req,res) => {
+
+    changeUserInfo: (req, res) => {
         let body = req.body;
         let user = req.user;
 
@@ -110,7 +111,7 @@ module.exports = {
         res.render('user/details', req.user);
     },
 
-    inspectProfile: (req,res) => {
+    inspectProfile: (req, res) => {
         let id = req.params.id;
         let thisUser = req.user;
         User.findById(id).then(userFound => {
@@ -123,18 +124,18 @@ module.exports = {
                 userComments: userFound.userComments
             };
             let inContacts = false;
-            if(thisUser.contacts.indexOf(userFound.id) !== -1){
+            if (thisUser.contacts.indexOf(userFound.id) !== -1) {
                 inContacts = true;
             }
             let isThis = true;
-            if(thisUser.id !== id){
+            if (thisUser.id !== id) {
                 isThis = false;
             }
             res.render('user/otherProfile', {user_inspect: user, id: id, inContacts: inContacts, isThis: isThis});
         });
     },
 
-    articlesByUser: (req,res) => {
+    articlesByUser: (req, res) => {
         let id = req.params.id;
         User.findById(id).then(userFound => {
             let user = userFound.fullName;
@@ -145,11 +146,11 @@ module.exports = {
         });
     },
 
-    contactsGet: (req,res) => {
+    contactsGet: (req, res) => {
         let user = req.user;
-        if(user.contacts.length > 0){
+        if (user.contacts.length > 0) {
             let contacts = [];
-            for(let contact of user.contacts){
+            for (let contact of user.contacts) {
                 User.findById(contact).then(c => {
                     let contactName = {
                         name: c.fullName,
@@ -166,10 +167,10 @@ module.exports = {
         }
     },
 
-    contactsPost: (req,res) => {
+    contactsPost: (req, res) => {
         let body = req.body;
         let user = req.user;
-        if(body.contact_id){
+        if (body.contact_id) {
             user.contacts.push(body.contact_id);
             user.save();
             User.findById(body.contact_id).then(contact => {
@@ -178,9 +179,9 @@ module.exports = {
             });
             res.redirect(`/user/details/${body.contact_id}`);
         }
-        if(body.remove_contact_id){
+        if (body.remove_contact_id) {
             let index = user.contacts.indexOf(body.remove_contact_id);
-            user.contacts.splice(index,1);
+            user.contacts.splice(index, 1);
             user.save();
             User.findById(body.remove_contact_id).then(contact => {
                 contact.contacts.splice(contact.indexOf(user.id),1);
@@ -189,6 +190,23 @@ module.exports = {
             res.redirect(`/user/details/${body.remove_contact_id}`);
         }
     },
+    deleteProfileGet: (req, res) => {
+        if (!req.user) {
+            res.redirect('/user/login');
+        }
+        res.render('user/deleteProfile', req.user);
+    },
+
+    deleteProfilePost: (req, res) => {
+        //TODO: Prep for delete? Delete user articles and delete user from DB
+        let id = req.user.id;
+
+        User.findOneAndRemove({_id: id}).then(user => {
+            user.prepareDelete();
+            res.redirect('/');
+        });
+    },
+
 
     userCommentsGet: (req, res) => {
         let id = req.params.id;
@@ -209,5 +227,4 @@ module.exports = {
             res.render(`user/comments`, {comments: comments, author: user});
         });
 
-    }
-};
+    }};

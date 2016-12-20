@@ -13,8 +13,8 @@ let userSchema = mongoose.Schema(
         avatar: {type: String, required: false, default: '/images/avatar_default.jpg'},
         userInformation: {type: String, required: false},
         contacts: [{type: String, required: false}],
-        userComments:  [{type: mongoose.Schema.ObjectId, ref: 'Comment'}],
-    }
+        //events: [{type: mongoose.Schema.ObjectId, ref: 'Event'}],
+        events: {type: [mongoose.Schema.ObjectId], default: []},        userComments:  [{type: mongoose.Schema.ObjectId, ref: 'Comment'}],    }
 );
 
 userSchema.method({
@@ -29,6 +29,14 @@ userSchema.method({
             return false;
         }
         let isAuthor = article.author.equals(this.id);
+        return isAuthor;
+    },
+
+    isEventAuthor: function (event) {
+        if (!event) {
+            return false;
+        }
+        let isAuthor = event.author.equals(this.id);
         return isAuthor;
     },
     isInRole: function (roleName) {

@@ -20,8 +20,8 @@ module.exports = (config) => {
     require('./../models/Article');
     require('./../models/Category');
     require('./../models/Tag');
+    require('./../models/Event');
     require('./../models/Comment');
-
 
 };
 
