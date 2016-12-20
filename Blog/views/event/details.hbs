@@ -25,12 +25,16 @@
                 </p>
 
                 <div>
-                {{#if hasJoined}}
-                    <a href="leaveEvent/{{event.id}}"><button class="dtp-buttons" >Leave event</button></a>
+                {{#if hasCancelled}}
+                    {{#unless hasExpired}}
+                        {{#if hasJoined}}
+                            <a href="leaveEvent/{{event.id}}"><button class="dtp-buttons" >Leave event</button></a>
+                        {{/if}}
+                        {{#unless hasJoined}}
+                            <a href="joinEvent/{{event.id}}"><button class="dtp-buttons">Join event</button></a>
+                        {{/unless}}
+                    {{/unless}}
                 {{/if}}
-                {{#unless hasJoined}}
-                    <a href="joinEvent/{{event.id}}"><button class="dtp-buttons">Join event</button></a>
-                {{/unless}}
                 </div>
 
                 <small class="...">

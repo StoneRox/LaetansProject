@@ -24,6 +24,15 @@ eventSchema.method({
         return isExpired;
     },
 
+    isCancelled: function (event) {
+        if (!event){
+            console.log("isExpired got wrong data");
+            return false;
+        }
+        let isCancelled = ((event.eventEnd < Date.now()) && (event.status != "Cancelled"));
+        return isCancelled;
+    },
+
     prepareDelete: function () {
         //Not Implemented
         },

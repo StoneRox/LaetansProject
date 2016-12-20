@@ -2,10 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="280306d9-ed72-4c6b-9064-37a27eeec051" name="Default" comment="Add search for users...&#10;Add avatars support...&#10;Add contacts list...&#10;Add inspect other users function...&#10;Add functionality for adding and removing contacts...&#10;Add user custom info section in the user profile page...&#10;Add show articles by user functionality...&#10;Minor visual changes...&#10;">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/views/event/editEvent.hbs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/routes.js" afterPath="$PROJECT_DIR$/config/routes.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/controllers/event.js" afterPath="$PROJECT_DIR$/controllers/event.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/models/Event.js" afterPath="$PROJECT_DIR$/models/Event.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/event/details.hbs" afterPath="$PROJECT_DIR$/views/event/details.hbs" />
     </list>
     <ignored path="SoftUniBlog.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -31,11 +30,9 @@
       <file leaf-file-name="Event.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/models/Event.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="6" column="19" lean-forward="false" selection-start-line="6" selection-start-column="4" selection-end-line="6" selection-end-column="19" />
-              <folding>
-                <element signature="e#791#1024#0" expanded="false" />
-              </folding>
+            <state relative-caret-position="259">
+              <caret line="29" column="25" lean-forward="true" selection-start-line="29" selection-start-column="25" selection-end-line="29" selection-end-column="25" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -62,43 +59,25 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="event.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="event.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/controllers/event.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="242">
-              <caret line="86" column="36" lean-forward="false" selection-start-line="86" selection-start-column="36" selection-end-line="86" selection-end-column="36" />
+            <state relative-caret-position="119">
+              <caret line="136" column="29" lean-forward="true" selection-start-line="136" selection-start-column="29" selection-end-line="136" selection-end-column="29" />
               <folding>
                 <element signature="e#147#390#0" expanded="false" />
+                <element signature="e#423#923#0" expanded="false" />
                 <element signature="e#461#623#0" expanded="false" />
                 <element signature="e#953#1106#0" expanded="false" />
+                <element signature="e#1137#2484#0" expanded="false" />
                 <element signature="e#2514#3289#0" expanded="false" />
-                <element signature="e#3319#4781#0" expanded="false" />
-                <element signature="e#5004#5360#0" expanded="false" />
-                <element signature="e#5396#5550#0" expanded="false" />
-                <element signature="e#5587#5948#0" expanded="false" />
-                <element signature="e#5985#6140#0" expanded="false" />
-                <element signature="e#6177#6926#0" expanded="false" />
+                <element signature="e#5016#5169#0" expanded="false" />
+                <element signature="e#5205#5561#0" expanded="false" />
+                <element signature="e#5597#5751#0" expanded="false" />
+                <element signature="e#5788#6149#0" expanded="false" />
+                <element signature="e#6186#6341#0" expanded="false" />
+                <element signature="e#6378#7127#0" expanded="false" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="create.hbs" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/views/event/create.hbs">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="85">
-              <caret line="5" column="53" lean-forward="true" selection-start-line="5" selection-start-column="53" selection-end-line="5" selection-end-column="53" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="editEvent.hbs" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/views/event/editEvent.hbs">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="250">
-              <caret line="84" column="22" lean-forward="true" selection-start-line="84" selection-start-column="22" selection-end-line="84" selection-end-column="22" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -129,21 +108,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Tag.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/models/Tag.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="14" column="35" lean-forward="true" selection-start-line="14" selection-start-column="35" selection-end-line="14" selection-end-column="35" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="details.hbs" pinned="false" current-in-tab="false">
+      <file leaf-file-name="details.hbs" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/views/event/details.hbs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="193">
-              <caret line="49" column="23" lean-forward="true" selection-start-line="49" selection-start-column="23" selection-end-line="49" selection-end-column="23" />
+            <state relative-caret-position="278">
+              <caret line="36" column="21" lean-forward="false" selection-start-line="36" selection-start-column="21" selection-end-line="36" selection-end-column="21" />
               <folding />
             </state>
           </provider>
@@ -203,11 +172,11 @@
         <option value="$PROJECT_DIR$/views/event/joinEvent.hbs" />
         <option value="$PROJECT_DIR$/views/event/leaveEvent.hbs" />
         <option value="$PROJECT_DIR$/views/event/deleteEvent.hbs" />
-        <option value="$PROJECT_DIR$/views/event/details.hbs" />
-        <option value="$PROJECT_DIR$/models/Event.js" />
         <option value="$PROJECT_DIR$/config/routes.js" />
         <option value="$PROJECT_DIR$/views/event/editEvent.hbs" />
+        <option value="$PROJECT_DIR$/models/Event.js" />
         <option value="$PROJECT_DIR$/controllers/event.js" />
+        <option value="$PROJECT_DIR$/views/event/details.hbs" />
       </list>
     </option>
   </component>
@@ -470,7 +439,7 @@
       <workItem from="1482188826515" duration="5094000" />
       <workItem from="1482236675666" duration="10434000" />
       <workItem from="1482247136417" duration="6856000" />
-      <workItem from="1482254544424" duration="3157000" />
+      <workItem from="1482254544424" duration="3827000" />
     </task>
     <task id="LOCAL-00001" summary="Create result.hbs">
       <created>1479730491285</created>
@@ -511,7 +480,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="347303000" />
+    <option name="totallyTimeSpent" value="347973000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="0" width="1378" height="744" extended-state="0" />
@@ -521,7 +490,7 @@
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32967034" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.1898527" sideWeight="0.5119048" order="10" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2992126" sideWeight="0.48809522" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.38740158" sideWeight="0.4940476" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.38740158" sideWeight="0.4940476" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3535188" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.19568452" sideWeight="0.5068493" order="3" side_tool="true" content_ui="tabs" />
@@ -849,24 +818,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/models/User.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="60" lean-forward="false" selection-start-line="6" selection-start-column="60" selection-end-line="6" selection-end-column="60" />
-          <folding>
-            <element signature="e#3332#4395#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/views/event/details.hbs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="193">
-          <caret line="49" column="23" lean-forward="true" selection-start-line="49" selection-start-column="23" selection-end-line="49" selection-end-column="23" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/views/event/deleteEvent.hbs">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="34">
@@ -883,12 +834,16 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/models/Event.js">
+    <entry file="file://$PROJECT_DIR$/controllers/article.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="19" lean-forward="false" selection-start-line="6" selection-start-column="4" selection-end-line="6" selection-end-column="19" />
+        <state relative-caret-position="235">
+          <caret line="179" column="24" lean-forward="true" selection-start-line="179" selection-start-column="24" selection-end-line="179" selection-end-column="63" />
           <folding>
-            <element signature="e#791#1024#0" expanded="false" />
+            <element signature="e#328#664#0" expanded="false" />
+            <element signature="e#696#1323#0" expanded="false" />
+            <element signature="e#1352#3215#0" expanded="false" />
+            <element signature="e#3244#4104#0" expanded="false" />
+            <element signature="e#6379#7249#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -909,36 +864,50 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/controllers/article.js">
+    <entry file="file://$PROJECT_DIR$/models/User.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="235">
-          <caret line="179" column="24" lean-forward="true" selection-start-line="179" selection-start-column="24" selection-end-line="179" selection-end-column="63" />
+        <state relative-caret-position="102">
+          <caret line="6" column="60" lean-forward="false" selection-start-line="6" selection-start-column="60" selection-end-line="6" selection-end-column="60" />
           <folding>
-            <element signature="e#328#664#0" expanded="false" />
-            <element signature="e#696#1323#0" expanded="false" />
-            <element signature="e#1352#3215#0" expanded="false" />
-            <element signature="e#3244#4104#0" expanded="false" />
-            <element signature="e#6379#7249#0" expanded="false" />
+            <element signature="e#3332#4395#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/models/Event.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="259">
+          <caret line="29" column="25" lean-forward="true" selection-start-line="29" selection-start-column="25" selection-end-line="29" selection-end-column="25" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/controllers/event.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="242">
-          <caret line="86" column="36" lean-forward="false" selection-start-line="86" selection-start-column="36" selection-end-line="86" selection-end-column="36" />
+        <state relative-caret-position="119">
+          <caret line="136" column="29" lean-forward="true" selection-start-line="136" selection-start-column="29" selection-end-line="136" selection-end-column="29" />
           <folding>
             <element signature="e#147#390#0" expanded="false" />
+            <element signature="e#423#923#0" expanded="false" />
             <element signature="e#461#623#0" expanded="false" />
             <element signature="e#953#1106#0" expanded="false" />
+            <element signature="e#1137#2484#0" expanded="false" />
             <element signature="e#2514#3289#0" expanded="false" />
-            <element signature="e#3319#4781#0" expanded="false" />
-            <element signature="e#5004#5360#0" expanded="false" />
-            <element signature="e#5396#5550#0" expanded="false" />
-            <element signature="e#5587#5948#0" expanded="false" />
-            <element signature="e#5985#6140#0" expanded="false" />
-            <element signature="e#6177#6926#0" expanded="false" />
+            <element signature="e#5016#5169#0" expanded="false" />
+            <element signature="e#5205#5561#0" expanded="false" />
+            <element signature="e#5597#5751#0" expanded="false" />
+            <element signature="e#5788#6149#0" expanded="false" />
+            <element signature="e#6186#6341#0" expanded="false" />
+            <element signature="e#6378#7127#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/event/details.hbs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="278">
+          <caret line="36" column="21" lean-forward="false" selection-start-line="36" selection-start-column="21" selection-end-line="36" selection-end-column="21" />
+          <folding />
         </state>
       </provider>
     </entry>

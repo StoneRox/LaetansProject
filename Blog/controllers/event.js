@@ -129,21 +129,22 @@ module.exports = {
             }
 
 
-
+            let hasExpired = event.isExpired(event);
+            let hasCancelled = event.isCancelled(event);
             //update status
-            if (event.isExpired(event)){
+            if (hasExpired){
                 event.status = "Over";
                 event.save();
             }
 
             if (!req.user.isEventAuthor(event)){
-                res.render('event/details', {event: event, isUserAuthorized: false, hasJoined: hasJoined});
+                res.render('event/details', {event: event, isUserAuthorized: false, hasJoined: hasJoined, hasExpired: hasExpired, hasCancelled: hasCancelled});
                 return;
             }
 
             req.user.isInRole('Admin').then(isAdmin => {
                 let isUserAuthorized = isAdmin || req.user.isEventAuthor(event);
-                res.render('event/details', {event: event, isUserAuthorized: isUserAuthorized, hasJoined: hasJoined});
+                res.render('event/details', {event: event, isUserAuthorized: isUserAuthorized, hasJoined: hasJoined, hasExpired: hasExpired, hasCancelled: hasCancelled});
             })
         })
     },
