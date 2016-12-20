@@ -39,7 +39,9 @@ module.exports = {
         let id = req.params.id;
 
         Event.findById(id).then(event => {
-            res.render('event/editEvent', {event: event});
+
+            let isCancelled = event.isCancelled(event);
+            res.render('event/editEvent', {event: event, isCancelled: isCancelled});
         })
     },
 
@@ -78,6 +80,12 @@ module.exports = {
                 event.eventEnd = eventArgs.eventEnd;
                 event.description = eventArgs.description;
                 event.picture = eventArgs.picture;
+                if (eventArgs.cancelEvent){
+                    event.status = "Cancelled";
+                }
+                else if((event.status == "Cancelled") && !eventArgs.cancelEvent){
+                    event.status = "Upcoming";
+                }
 
                 event.save((err) => {
                     if (err) {
@@ -130,7 +138,7 @@ module.exports = {
 
 
             let hasExpired = event.isExpired(event);
-            let hasCancelled = event.isCancelled(event);
+            let isCancelled = event.isCancelled(event);
             let isFull = event.isFull(event);
             //update status
             if (hasExpired){
@@ -139,13 +147,15 @@ module.exports = {
             }
 
             if (!req.user.isEventAuthor(event)){
-                res.render('event/details', {event: event, isUserAuthorized: false, hasJoined: hasJoined, hasExpired: hasExpired, hasCancelled: hasCancelled, isFull: isFull});
+                res.render('event/details', {event: event, isUserAuthorized: false,
+                    hasJoined: hasJoined, hasExpired: hasExpired, isCancelled: isCancelled, isFull: isFull});
                 return;
             }
 
             req.user.isInRole('Admin').then(isAdmin => {
                 let isUserAuthorized = isAdmin || req.user.isEventAuthor(event);
-                res.render('event/details', {event: event, isUserAuthorized: isUserAuthorized, hasJoined: hasJoined, hasExpired: hasExpired, hasCancelled: hasCancelled, isFull: isFull});
+                res.render('event/details', {event: event, isUserAuthorized: isUserAuthorized,
+                    hasJoined: hasJoined, hasExpired: hasExpired, isCancelled: isCancelled, isFull: isFull});
             })
         })
     },

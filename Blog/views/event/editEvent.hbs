@@ -77,6 +77,16 @@
                     </div>
                 </div>
 
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label" for="cancelEvent">Cancel this event?</label>
+                        <div class="col-sm-4 ">
+                            <input type="checkbox" class="form-control" id="cancelEvent"
+                                   name="cancelEvent" value="Declare the event 'Cancelled'"
+                            {{#if isCancelled}}checked{{/if}}>
+                        </div>
+                    </div>
+
+
                 <div class="form-group">
                     <div class="col-sm-4 col-sm-offset-4">
                         <a class="btn btn-default" href="/event/list">Cancel</a>
