@@ -184,7 +184,7 @@ module.exports = {
             user.contacts.splice(index, 1);
             user.save();
             User.findById(body.remove_contact_id).then(contact => {
-                contact.contacts.splice(contact.indexOf(user.id),1);
+                contact.contacts.splice(contact.contacts.indexOf(user.id),1);
                 contact.save();
             });
             res.redirect(`/user/details/${body.remove_contact_id}`);
@@ -212,7 +212,6 @@ module.exports = {
         let id = req.params.id;
         User.findById(id).populate('userComments').then(user => {
             let comments = user.userComments;
-            let editable = false;
             for(let comment of comments){
                 comment.dateTime = comment.date.toLocaleDateString() + ' ' + comment.date.toLocaleTimeString();
                 Article.findById(comment.article).then(article => {
